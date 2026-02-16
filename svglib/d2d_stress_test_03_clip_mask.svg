@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 600 600">
+  <defs>
+    <radialGradient id="rg" cx="0.35" cy="0.35" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="0.35" stop-color="#4cffb7" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#2a2bff" stop-opacity="0.25"/>
+    </radialGradient>
+
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f0f18"/>
+      <stop offset="1" stop-color="#22084a"/>
+    </linearGradient>
+
+    <clipPath id="clipBlob" clipPathUnits="userSpaceOnUse">
+      <path d="M 300,40 C 430,40 560,140 560,280 C 560,430 440,560 300,560 C 160,560 40,430 40,280 C 40,140 170,40 300,40 Z"/>
+    </clipPath>
+
+    <mask id="ringMask" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="600" height="600" fill="white"/>
+      <circle cx="300" cy="300" r="60" fill="black" fill-opacity="0.0"/>
+      <circle cx="300" cy="300" r="96" fill="black" fill-opacity="1.0"/>
+      <circle cx="300" cy="300" r="132" fill="black" fill-opacity="0.0"/>
+      <circle cx="300" cy="300" r="168" fill="black" fill-opacity="1.0"/>
+      <circle cx="300" cy="300" r="204" fill="black" fill-opacity="0.0"/>
+      <circle cx="300" cy="300" r="240" fill="black" fill-opacity="1.0"/>
+    </mask>
+  </defs>
+
+  <rect x="0" y="0" width="600" height="600" fill="url(#frame)"/>
+
+  <g clip-path="url(#clipBlob)" mask="url(#ringMask)">
+    <circle cx="10" cy="10" r="8" fill="url(#rg)" opacity="0.95"/>
+    <circle cx="50" cy="10" r="9" fill="url(#rg)" opacity="0.95"/>
+    <circle cx="90" cy="10" r="10" fill="url(#rg)" opacity="0.95"/>
+    <!-- (… Raster … insgesamt 225 Kreise) -->
+  </g>
+
+  <path d="M 300,40 C 430,40 560,140 560,280 C 560,430 440,560 300,560 C 160,560 40,430 40,280 C 40,140 170,40 300,40 Z"
+        fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="3"/>
+
+  <g opacity="0.65" transform="rotate(-12 300 300)">
+    <path d="M 120,320 C 180,160 420,160 480,320 C 420,440 180,440 120,320 Z"
+          fill="#ff2bd6" fill-opacity="0.25" stroke="#ff2bd6" stroke-opacity="0.7" stroke-width="2"
+          fill-rule="evenodd"/>
+    <path d="M 170,320 C 210,220 390,220 430,320 C 390,400 210,400 170,320 Z"
+          fill="#000000" fill-opacity="0.15"/>
+  </g>
+</svg>

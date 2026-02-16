@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 400 300">
+
+  <!-- Background -->
+  <rect x="0" y="0" width="400" height="300" fill="#ffffff"/>
+
+  <!-- Frame -->
+  <rect x="10" y="10" width="380" height="280" fill="none" stroke="#111111" stroke-width="2"/>
+
+  <!-- Center crosshair (global, no groups) -->
+  <line x1="200" y1="10"  x2="200" y2="290" stroke="#cccccc" stroke-width="1"/>
+  <line x1="10"  y1="150" x2="390" y2="150" stroke="#cccccc" stroke-width="1"/>
+
+  <!-- Scene root: center at (200,150) -->
+  <g transform="translate(200 150)">
+
+    <!-- Local axes -->
+    <line x1="-180" y1="0" x2="180" y2="0" stroke="#888888" stroke-width="0.8"/>
+    <line x1="0" y1="-130" x2="0" y2="130" stroke="#888888" stroke-width="0.8"/>
+
+    <!-- Reference circles -->
+    <circle cx="0" cy="0" r="120" fill="none" stroke="#dddddd" stroke-width="1"/>
+    <circle cx="0" cy="0" r="80"  fill="none" stroke="#eeeeee" stroke-width="1"/>
+
+    <!-- A little origin marker -->
+    <rect x="-3" y="-3" width="6" height="6" fill="#000000" opacity="0.6"/>
+
+    <!-- ===================== -->
+    <!-- 1) Corner arrows test -->
+    <!-- If parent/child transform chaining is wrong, these will not sit nicely near corners or point inward -->
+    <!-- Base arrow is baked (polygon) and each corner uses nested transforms -->
+    <!-- ===================== -->
+
+    <!-- Top-left: should be near (-140,-90) and point to center (down-right) -->
+    <g transform="translate(-140 -90) rotate(45)">
+      <rect x="-3" y="-3" width="6" height="6" fill="#ff0000" opacity="0.55"/>
+      <polygon points="0,-12 48,0 0,12 10,0" fill="#ff0000" opacity="0.35" stroke="#ff0000" stroke-width="1"/>
+      <polyline points="0,0 -20,0 -20,20" fill="none" stroke="#ff0000" stroke-width="2"/>
+    </g>
+
+    <!-- Top-right: should be near (140,-90) and point to center (down-left) -->
+    <g transform="translate(140 -90) rotate(135)">
+      <rect x="-3" y="-3" width="6" height="6" fill="#00aa00" opacity="0.55"/>
+      <polygon points="0,-12 48,0 0,12 10,0" fill="#00aa00" opacity="0.35" stroke="#00aa00" stroke-width="1"/>
+      <polyline points="0,0 -20,0 -20,20" fill="none" stroke="#00aa00" stroke-width="2"/>
+    </g>
+
+    <!-- Bottom-right: should be near (140,90) and point to center (up-left) -->
+    <g transform="translate(140 90) rotate(-135)">
+      <rect x="-3" y="-3" width="6" height="6" fill="#0066ff" opacity="0.55"/>
+      <polygon points="0,-12 48,0 0,12 10,0" fill="#0066ff" opacity="0.35" stroke="#0066ff" stroke-width="1"/>
+      <polyline points="0,0 -20,0 -20,20" fill="none" stroke="#0066ff" stroke-width="2"/>
+    </g>
+
+    <!-- Bottom-left: should be near (-140,90) and point to center (up-right) -->
+    <g transform="translate(-140 90) rotate(-45)">
+      <rect x="-3" y="-3" width="6" height="6" fill="#ff00cc" opacity="0.55"/>
+      <polygon points="0,-12 48,0 0,12 10,0" fill="#ff00cc" opacity="0.35" stroke="#ff00cc" stroke-width="1"/>
+      <polyline points="0,0 -20,0 -20,20" fill="none" stroke="#ff00cc" stroke-width="2"/>
+    </g>
+
+    <!-- ================================ -->
+    <!-- 2) Parent/child multiplication test -->
+    <!-- The little "plus" should land exactly on the r=120 circle at angle +20° (right side-ish), i.e. its pivot marker sits on the circle. -->
+    <!-- If you multiply in the wrong order (parent*local vs local*parent), it will NOT be on the circle. -->
+    <!-- ================================ -->
+
+    <!-- Reference dot where the plus SHOULD be centered after transforms -->
+    <!-- (This is only a visual hint; if your transforms are correct, the plus' pivot marker will overlap it closely) -->
+    <g transform="rotate(20)">
+      <g transform="translate(120 0)">
+        <circle cx="0" cy="0" r="3.2" fill="#111111" opacity="0.35"/>
+      </g>
+    </g>
+
+    <!-- The actual transformed "plus" (nested) -->
+    <g transform="rotate(20)">
+      <g transform="translate(120 0)">
+        <g transform="scale(1.2 0.8) rotate(-30)">
+          <!-- pivot marker -->
+          <rect x="-3" y="-3" width="6" height="6" fill="#ff8800" opacity="0.75"/>
+          <!-- plus sign: two rectangles -->
+          <rect x="-18" y="-4" width="36" height="8" fill="#ff8800" opacity="0.35" stroke="#ff8800" stroke-width="1"/>
+          <rect x="-4" y="-18" width="8" height="36" fill="#ff8800" opacity="0.35" stroke="#ff8800" stroke-width="1"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ==================================== -->
+    <!-- 3) Rotation around a non-zero pivot test -->
+    <!-- A bar rotates around its own pivot at (60,0). If pivot handling is wrong, it swings around origin instead. -->
+    <!-- ==================================== -->
+
+    <!-- Pivot marker at local (60,0) in scene coords -->
+    <circle cx="60" cy="0" r="3.2" fill="#000000" opacity="0.25"/>
+
+    <!-- Bar rotated around pivot (60,0) -->
+    <g transform="rotate(60 60 0)">
+      <rect x="20" y="-6" width="80" height="12" fill="#8844ff" opacity="0.22" stroke="#8844ff" stroke-width="1"/>
+      <!-- Mark its local pivot -->
+      <rect x="57" y="-3" width="6" height="6" fill="#8844ff" opacity="0.65"/>
+    </g>
+
+    <!-- ==================================== -->
+    <!-- 4) Mirror test: scale(-1,1) in a group -->
+    <!-- The chevron should appear mirrored on the LEFT side symmetrically. If you ignore negative scale or mess up order, it won't. -->
+    <!-- ==================================== -->
+
+    <!-- Right chevron (no mirror) -->
+    <g transform="translate(0 80) translate(80 0)">
+      <polygon points="0,-12 30,0 0,12 8,0" fill="#009999" opacity="0.30" stroke="#009999" stroke-width="1"/>
+      <rect x="-3" y="-3" width="6" height="6" fill="#009999" opacity="0.65"/>
+    </g>
+
+    <!-- Mirrored left chevron -->
+    <g transform="translate(0 80) scale(-1 1) translate(80 0)">
+      <polygon points="0,-12 30,0 0,12 8,0" fill="#009999" opacity="0.30" stroke="#009999" stroke-width="1"/>
+      <rect x="-3" y="-3" width="6" height="6" fill="#009999" opacity="0.65"/>
+    </g>
+
+  </g>
+</svg>

@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{7322ebd4-0751-422e-9a78-f2a1459ac56d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{c18a3a49-b6f1-4f94-bdea-c7c8cf92870e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Parser">
+      <UniqueIdentifier>{fbea3924-2174-48e6-8529-6ce71dfffad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{2ee3c324-b63f-4c95-8818-262639d461df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Parser">
+      <UniqueIdentifier>{ad41af42-8c72-4d63-b378-2b5c2e23b23f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{6f28d410-2577-450c-8a7f-96a96f49993a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Window">
+      <UniqueIdentifier>{43614a5b-3b82-4603-bcb4-a931ce1cc3fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{c04e6eb8-a6eb-418e-bdc5-1ad080a22f0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Window">
+      <UniqueIdentifier>{16f95167-cb3d-48e2-be8f-c5b21b1dd215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Resource Files\images">
+      <UniqueIdentifier>{f12d9773-e43e-470f-a565-138998fc8cbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource Files\SVG">
+      <UniqueIdentifier>{c4be362f-9307-4d83-aee2-0602371c40ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource Files\SVG\tests">
+      <UniqueIdentifier>{9cfdac80-e534-4599-800a-cbf37605de77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource Files\SVG\tests\unsupported tags">
+      <UniqueIdentifier>{939d01d7-6243-448a-ab32-39be2d89b09e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugLogger.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DxDebugName.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="IDeviceNotify.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SvgCache.h">
+      <Filter>Header Files\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="IHitTestListener.h">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugLogger.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="SvgCache.cpp">
+      <Filter>Source Files\Parser</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="humanBodyFront.svg">
+      <Filter>Header Files\Resource Files\SVG</Filter>
+    </None>
+    <None Include="kartesianGraph.svg">
+      <Filter>Header Files\Resource Files\SVG</Filter>
+    </None>
+    <None Include="humanBodyFrontTEST.svg">
+      <Filter>Header Files\Resource Files\SVG\tests</Filter>
+    </None>
+    <None Include="PfadTesting.svg">
+      <Filter>Header Files\Resource Files\SVG\tests</Filter>
+    </None>
+    <None Include="Test.svg">
+      <Filter>Header Files\Resource Files\SVG\tests</Filter>
+    </None>
+    <None Include="testSVGElements.svg">
+      <Filter>Header Files\Resource Files\SVG\tests</Filter>
+    </None>
+    <None Include="testingParser.svg">
+      <Filter>Header Files\Resource Files\SVG\tests</Filter>
+    </None>
+    <None Include="testingParserGenerated.svg">
+      <Filter>Header Files\Resource Files\SVG\tests</Filter>
+    </None>
+    <None Include="d2d_stress_test_03_clip.svg">
+      <Filter>Header Files\Resource Files\SVG\tests\unsupported tags</Filter>
+    </None>
+    <None Include="d2d_stress_test_01_paths.svg">
+      <Filter>Header Files\Resource Files\SVG\tests\unsupported tags</Filter>
+    </None>
+    <None Include="d2d_stress_test_02_strokes_transforms.svg">
+      <Filter>Header Files\Resource Files\SVG\tests\unsupported tags</Filter>
+    </None>
+    <None Include="d2d_stress_test_03_clip_mask.svg">
+      <Filter>Header Files\Resource Files\SVG\tests\unsupported tags</Filter>
+    </None>
+    <None Include="d2d_stress_test_01_paths_supported.svg">
+      <Filter>Header Files\Resource Files\SVG\tests</Filter>
+    </None>
+    <None Include="d2d_transform_test_groups.svg">
+      <Filter>Header Files\Resource Files\SVG\tests</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="humanBodyFront.png">
+      <Filter>Header Files\Resource Files\images</Filter>
+    </Image>
+    <Image Include="kartesianGraph.png">
+      <Filter>Header Files\Resource Files\images</Filter>
+    </Image>
+    <Image Include="KontextmenueErsatz.png">
+      <Filter>Header Files\Resource Files\images</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

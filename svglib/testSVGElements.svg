@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- PATH -->
+    <path d="M10 10 L100 10 L100 80 Z"
+          stroke="black" fill="none" id="path1"/>
+
+    <!-- CIRCLE -->
+    <circle cx="150" cy="40" r="30"
+            stroke="red" fill="none" id="circle1"/>
+
+    <!-- RECT -->
+    <rect x="200" y="10" width="60" height="40"
+          stroke="blue" fill="none" id="rect1"/>
+
+    <!-- ELLIPSE -->
+    <ellipse cx="60" cy="140" rx="40" ry="20"
+             stroke="green" fill="none" id="ellipse1"/>
+
+    <!-- LINE -->
+    <line x1="130" y1="120" x2="200" y2="160"
+          stroke="purple" id="line1"/>
+
+    <!-- POLYLINE -->
+    <polyline points="10,200 60,240 110,200 160,240"
+              stroke="orange" fill="none" id="polyline1"/>
+
+    <!-- POLYGON -->
+    <polygon points="200,200 260,200 260,260 200,260"
+             stroke="brown" fill="none" id="polygon1"/>
+
+</svg>
