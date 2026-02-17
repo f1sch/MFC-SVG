@@ -52,9 +52,6 @@ END_MESSAGE_MAP()
 
 
 // CTestWindowDlg dialog
-
-
-
 CTestWindowDlg::CTestWindowDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_TESTWINDOW_DIALOG, pParent)
 {
@@ -65,7 +62,6 @@ void CTestWindowDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_PICTURE_CONTROL, d2dView_);
-	//DDX_Control(pDX, IDC_GROUP_BOX_1, controlContainer_);
 	DDX_Control(pDX, IDC_SVG_HIT_RESULT, staticHitResult_);
 	DDX_Control(pDX, IDC_CURRENT_SELECTION, currentSelection_);
 	DDX_Control(pDX, IDC_COMBO_SVGS, m_comboSvg);
@@ -76,9 +72,6 @@ BEGIN_MESSAGE_MAP(CTestWindowDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_SIZE()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON1, &CTestWindowDlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON_CANCEL, &CTestWindowDlg::OnBnClickedCancel)
-	ON_BN_CLICKED(IDC_RADIO1, &CTestWindowDlg::OnBnClickedRadio1)
 	ON_STN_CLICKED(IDC_SVG_HIT_RESULT, &CTestWindowDlg::OnStnClickedSvgHitResult)
 	ON_CBN_SELCHANGE(IDC_COMBO_SVGS, &CTestWindowDlg::OnCbnSelchangeComboSvgs)
 END_MESSAGE_MAP()
@@ -116,36 +109,6 @@ BOOL CTestWindowDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	HRESULT hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED); // 
-
-
-	//int arrIDs[] = { IDC_BUTTON_OK, IDC_BUTTON_KEEP, IDC_BUTTON_CANCEL, IDC_RADIO1, IDC_RADIO2, IDC_RADIO3, IDC_RADIO4 };
-	//const int n = sizeof(arrIDs) / sizeof(arrIDs[0]);
-	//
-	//HWND hContainer = controlContainer_.GetSafeHwnd();
-	//
-	//controlContainer_.ModifyStyle(0, WS_CHILD);
-	//
-	//for (int i = 0; i < n; ++i)
-	//{
-	//	CWnd* pCtrl = GetDlgItem(arrIDs[i]);
-	//	if (!pCtrl) continue;
-	//
-	//	CRect rcCtrl;
-	//	pCtrl->GetWindowRect(&rcCtrl);
-	//
-	//	POINT pt[2] = { rcCtrl.left, rcCtrl.top, rcCtrl.right, rcCtrl.bottom };
-	//
-	//	::ScreenToClient(hContainer, pt);
-	//
-	//	rcCtrl.left		= pt[0].x; 
-	//	rcCtrl.top		= pt[0].y; 
-	//	rcCtrl.right	= pt[1].x; 
-	//	rcCtrl.bottom	= pt[1].y;
-	//	
-	//	::SetParent(pCtrl->GetSafeHwnd(), hContainer);
-	//
-	//	pCtrl->MoveWindow(&rcCtrl);
-	//}
 
 	CRect rect;
 	GetDlgItem(IDC_PICTURE_CONTROL)->GetWindowRect(&rect);
@@ -225,16 +188,6 @@ void CTestWindowDlg::OnSize(UINT nType, int cx, int cy)
 {
 	CDialogEx::OnSize(nType, cx, cy);
 
-	// Radio & Button Controls
-	//RepositionCtrl(IDC_GROUP_BOTTOM_RIGHT);
-	//RepositionCtrl(IDC_BUTTON_OK);
-	//RepositionCtrl(IDC_BUTTON_KEEP);
-	//RepositionCtrl(IDC_BUTTON_CANCEL);
-	//RepositionCtrl(IDC_RADIO1);
-	//RepositionCtrl(IDC_RADIO2);
-	//RepositionCtrl(IDC_RADIO3);
-	//RepositionCtrl(IDC_RADIO4);
-
 	// svglib
 	CWnd* pPic = GetDlgItem(IDC_PICTURE_CONTROL); 
 	if (!pPic) return;
@@ -251,22 +204,6 @@ void CTestWindowDlg::OnSize(UINT nType, int cx, int cy)
 HCURSOR CTestWindowDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
-}
-
-void CTestWindowDlg::OnBnClickedButton1()
-{
-	// TODO: Add your control notification handler code here
-}
-
-void CTestWindowDlg::OnBnClickedCancel()
-{
-	// TODO: Add your control notification handler code here
-	CDialogEx::OnCancel();
-}
-
-void CTestWindowDlg::OnBnClickedRadio1()
-{
-	// TODO: Add your control notification handler code here
 }
 
 void CTestWindowDlg::OnSvgHit(const std::wstring& id)
