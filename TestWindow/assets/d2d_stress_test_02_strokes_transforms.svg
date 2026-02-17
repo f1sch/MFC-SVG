@@ -37,7 +37,7 @@
     <rect x="1062.60" y="839.21" width="116.46" height="95.30" fill="none" stroke="#ffffff" stroke-opacity="0.456" stroke-width="3.144" stroke-dasharray="11.11,1.97,0.40,1.53" stroke-dashoffset="13.66" stroke-linejoin="bevel" stroke-linecap="square" stroke-miterlimit="93.03" transform="rotate(173.47 1120.83 886.86) scale(1.379 2.045)"/>
     <rect x="442.10" y="1752.74" width="210.26" height="93.45" fill="none" stroke="#ffffff" stroke-opacity="0.586" stroke-width="2.996" stroke-dasharray="7.79,16.63,7.62,15.56" stroke-dashoffset="10.47" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="43.75" transform="rotate(156.77 547.23 1799.47) scale(1.078 0.740)"/>
     <rect x="750.76" y="1837.02" width="159.20" height="67.35" fill="none" stroke="#ffffff" stroke-opacity="0.496" stroke-width="2.511" stroke-dasharray="11.07,11.41,10.66,18.18" stroke-dashoffset="22.74" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="49.93" transform="rotate(229.35 830.36 1870.69) scale(1.655 1.135)"/>
-    <!-- (… weitere <rect> … insgesamt 70 Stück) -->
+    <!-- (… weitere <rect> … insgesamt 70 Stueck) -->
   </g>
 
   <!-- Tiny/huge stroke-width contrast in same doc -->

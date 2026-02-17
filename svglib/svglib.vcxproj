@@ -184,19 +184,13 @@
     <None Include="d2d_stress_test_03_clip.svg" />
     <None Include="d2d_stress_test_03_clip_mask.svg" />
     <None Include="d2d_transform_test_groups.svg" />
+    <None Include="Ghostscript_Tiger.svg" />
     <None Include="humanBodyFront.svg" />
     <None Include="humanBodyFrontTEST.svg" />
-    <None Include="kartesianGraph.svg" />
-    <None Include="PfadTesting.svg" />
-    <None Include="Test.svg" />
-    <None Include="testingParser.svg" />
-    <None Include="testingParserGenerated.svg" />
     <None Include="testSVGElements.svg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="humanBodyFront.png" />
-    <Image Include="kartesianGraph.png" />
-    <Image Include="KontextmenueErsatz.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

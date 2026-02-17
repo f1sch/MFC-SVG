@@ -124,6 +124,7 @@ BOOL CTestWindowDlg::OnInitDialog()
 	comboSvg_.AddString(L"assets\\humanBodyFront.svg");
 	comboSvg_.AddString(L"assets\\humanBodyFrontTEST.svg");
 	comboSvg_.AddString(L"assets\\d2d_transform_test_groups.svg");
+	comboSvg_.AddString(L"assets\\Ghostscript_Tiger.svg");
 	comboSvg_.AddString(L"assets\\d2d_stress_test_01_paths.svg");
 	comboSvg_.AddString(L"assets\\d2d_stress_test_01_paths_supported.svg");
 	comboSvg_.AddString(L"assets\\d2d_stress_test_02_strokes_transforms.svg");
