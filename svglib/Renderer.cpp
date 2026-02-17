@@ -223,7 +223,7 @@ HRESULT Renderer::Render(const RECT& paintRc)
 
 	ctx->SetTransform(D2D1::Matrix3x2F::Identity());
 
-	// Clipping nur sinnvoll für Teilinvalidierungen des Renderbereichs
+	// Clipping nur sinnvoll fï¿½r Teilinvalidierungen des Renderbereichs
 	//D2D1_RECT_F clip;
 	//if (paintRc.right <= paintRc.left || paintRc.bottom <= paintRc.top)
 	//{
@@ -314,7 +314,7 @@ HRESULT Renderer::Render(const RECT& paintRc)
 	if (hr == D2DERR_RECREATE_TARGET)
 	{
 		DebugLogger::Warning("Presentation Error: Caller needs to recreate Rendertarget");
-		// alle D2D-Ressourcen freigeben, die von ID2D1RenderTarget abhängen (Bitmaps, Brushes, Layers …)
+		// alle D2D-Ressourcen freigeben, die von ID2D1RenderTarget abhï¿½ngen (Bitmaps, Brushes, Layers ï¿½)
 		// RenderTarget/SwapChain/Context neu aufbauen.
 		
 		if (!devices_->IsShuttingDown())
