@@ -40,6 +40,9 @@ namespace SvgLib::Graphics
 		void SetHoveredElement(const std::wstring& id) { hoveredId_ = id; }
 		std::wstring_view GetHoveredElement() { return hoveredId_; }
 
+		void SetSvgDocRendered(const bool rendered) { svgDocRendered_ = rendered; }
+		void SetSvgGeomsRendered(const bool rendererd) { svgGeomsRendered_ = rendererd; }
+
 		void SetStyleAttribute(ID2D1SvgElement* element, std::wstring attribute, D2D1::ColorF color);
 	
 		void OnMouseMove(int x, int y);
@@ -79,6 +82,9 @@ namespace SvgLib::Graphics
 		Devices* devices_;
 
 		std::unique_ptr<SvgLib::Parser::SvgCache> svgCache_;
+		// TODO: add vars to specify what is rendered
+		bool svgDocRendered_ = true;
+		bool svgGeomsRendered_ = true;
 	};
 
 }

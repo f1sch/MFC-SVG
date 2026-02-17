@@ -54,6 +54,8 @@ END_MESSAGE_MAP()
 // CTestWindowDlg dialog
 CTestWindowDlg::CTestWindowDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_TESTWINDOW_DIALOG, pParent)
+	, checkSvgDocEnableDisable_(FALSE)
+	, checkSvgGeomEnableDisable_(FALSE)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -65,6 +67,10 @@ void CTestWindowDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SVG_HIT_RESULT, staticHitResult_);
 	DDX_Control(pDX, IDC_CURRENT_SELECTION, currentSelection_);
 	DDX_Control(pDX, IDC_COMBO_SVGS, comboSvg_);
+	DDX_Control(pDX, IDC_CHECK_DOC, checkSvgDoc_);
+	DDX_Control(pDX, IDC_CHECK_GEOM, checkSvgGeometry_);
+	DDX_Check(pDX, IDC_CHECK_DOC, checkSvgDocEnableDisable_);
+	DDX_Check(pDX, IDC_CHECK_GEOM, checkSvgGeomEnableDisable_);
 }
 
 BEGIN_MESSAGE_MAP(CTestWindowDlg, CDialogEx)
@@ -74,6 +80,8 @@ BEGIN_MESSAGE_MAP(CTestWindowDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_STN_CLICKED(IDC_SVG_HIT_RESULT, &CTestWindowDlg::OnStnClickedSvgHitResult)
 	ON_CBN_SELCHANGE(IDC_COMBO_SVGS, &CTestWindowDlg::OnCbnSelchangeComboSvgs)
+	ON_BN_CLICKED(IDC_CHECK_DOC, &CTestWindowDlg::OnBnClickedCheckDoc)
+	ON_BN_CLICKED(IDC_CHECK_GEOM, &CTestWindowDlg::OnBnClickedCheckGeom)
 END_MESSAGE_MAP()
 
 
@@ -141,6 +149,8 @@ BOOL CTestWindowDlg::OnInitDialog()
 
 	CacheAnchors();
 	
+	checkSvgDoc_.SetCheck(true);
+	checkSvgGeometry_.SetCheck(true);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -220,6 +230,24 @@ void CTestWindowDlg::CacheAnchors()
 	comboMarginTop_ = rcCombo.top;
 	comboSize_ = rcCombo.Size();
 	comboAnchorCached_ = true;
+
+	CRect rcCheckSvgDoc;
+	checkSvgDoc_.GetWindowRect(&rcCheckSvgDoc);
+	ScreenToClient(&rcCheckSvgDoc);
+
+	checkSvgDocMarginRight_ = client.right - rcCheckSvgDoc.right;
+	checkSvgDocMarginTop_ = rcCheckSvgDoc.top;
+	checkSvgDocSize_ = rcCheckSvgDoc.Size();
+	checkSvgDocAnchorCached_ = true;
+
+	CRect rcCheckSvgGeom;
+	checkSvgGeometry_.GetWindowRect(&rcCheckSvgGeom);
+	ScreenToClient(&rcCheckSvgGeom);
+
+	checkSvgGeomMarginRight_ = client.right - rcCheckSvgGeom.right;
+	checkSvgGeomMarginTop_ = rcCheckSvgGeom.top;
+	checkSvgGeomSize_ = rcCheckSvgGeom.Size();
+	checkSvgGeomAnchorCached_ = true;
 }
 
 void CTestWindowDlg::UpdateAnchoredLayout(int cx, int cy)
@@ -236,6 +264,36 @@ void CTestWindowDlg::UpdateAnchoredLayout(int cx, int cy)
 		top,
 		comboSize_.cx,
 		comboSize_.cy,
+		SWP_NOZORDER | SWP_NOACTIVATE
+	);
+
+	if (!checkSvgDocAnchorCached_ || !::IsWindow(checkSvgDoc_.m_hWnd))
+		return;
+
+	const int leftDoc = max(0, cx - checkSvgDocMarginRight_ - checkSvgDocSize_.cx);
+	const int topDoc = max(0, checkSvgDocMarginTop_);
+
+	checkSvgDoc_.SetWindowPos(
+		nullptr,
+		leftDoc,
+		topDoc,
+		checkSvgDocSize_.cx,
+		checkSvgDocSize_.cy,
+		SWP_NOZORDER | SWP_NOACTIVATE
+	);
+
+	if (!checkSvgGeomAnchorCached_ || !::IsWindow(checkSvgGeometry_.m_hWnd))
+		return;
+
+	const int leftGeom = max(0, cx - checkSvgGeomMarginRight_ - checkSvgGeomSize_.cx);
+	const int topGeom = max(0, checkSvgGeomMarginTop_);
+
+	checkSvgGeometry_.SetWindowPos(
+		nullptr,
+		leftGeom,
+		topGeom,
+		checkSvgGeomSize_.cx,
+		checkSvgGeomSize_.cy,
 		SWP_NOZORDER | SWP_NOACTIVATE
 	);
 }
@@ -337,3 +395,26 @@ void CTestWindowDlg::OnCbnSelchangeComboSvgs()
 		svgLibWindow_->Invalidate();
 	}
 }
+
+void CTestWindowDlg::OnBnClickedCheckDoc()
+{
+	UpdateData(TRUE);
+	if (checkSvgDocEnableDisable_)
+		svgLibWindow_->SetRendererStates("doc", true);
+	else
+		svgLibWindow_->SetRendererStates("doc", false);
+	
+	svgLibWindow_->Invalidate();
+}
+
+void CTestWindowDlg::OnBnClickedCheckGeom()
+{
+	UpdateData(TRUE);
+	if (checkSvgGeomEnableDisable_)
+		svgLibWindow_->SetRendererStates("geom", true);
+	else
+		svgLibWindow_->SetRendererStates("geom", false);
+	
+	svgLibWindow_->Invalidate();
+}
+

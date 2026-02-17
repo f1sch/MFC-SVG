@@ -35,6 +35,7 @@ namespace SvgLib::Window
 		void SetEventListener(IEventListener* listener) { listener_ = listener; }
 
 		void SetGraphicToLoad(std::wstring filename);
+		void SetRendererStates(std::string_view resource, bool rendered);
 	protected:
 	
 		afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);

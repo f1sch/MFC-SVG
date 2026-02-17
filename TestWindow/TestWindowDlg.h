@@ -27,6 +27,8 @@ public:
 	afx_msg void OnCbnSelchangeComboSvgs();
 	afx_msg void OnStnClickedSvgHitResult();
 	virtual void OnSvgHit(const std::wstring& id) override;
+	afx_msg void OnBnClickedCheckDoc();
+	afx_msg void OnBnClickedCheckGeom();
 
 protected:
 	HICON m_hIcon;
@@ -57,6 +59,20 @@ private:
 	int comboMarginRight_ = 0;
 	int comboMarginTop_ = 0;
 	CSize comboSize_{ 0, 0 };
+
+	CButton checkSvgDoc_;
+	BOOL checkSvgDocEnableDisable_;
+	bool checkSvgDocAnchorCached_ = false;
+	int checkSvgDocMarginRight_ = 0;
+	int checkSvgDocMarginTop_ = 0;
+	CSize checkSvgDocSize_{ 0, 0 };
+
+	CButton checkSvgGeometry_;
+	BOOL checkSvgGeomEnableDisable_;
+	bool checkSvgGeomAnchorCached_ = false;
+	int checkSvgGeomMarginRight_ = 0;
+	int checkSvgGeomMarginTop_ = 0;
+	CSize checkSvgGeomSize_{ 0, 0 };
 
 	CStatic staticHitResult_;
 	CStatic currentSelection_;

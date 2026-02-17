@@ -262,14 +262,14 @@ HRESULT Renderer::Render(const RECT& paintRc)
 		tag1++;
 	}
 	// Render SVG Document
-	if (devices_->GetD2DSvgDocument())
+	if (devices_->GetD2DSvgDocument() && svgDocRendered_)
 	{
 		//ToggleElementDisplay(L"Head"); // testing
 		ctx->DrawSvgDocument(devices_->GetD2DSvgDocument());
 	}
 	// Render Geometries
 	D2D1_MATRIX_3X2_F current = worldTransform_;
-	if (!svgCache_->IsEmpty())
+	if (!svgCache_->IsEmpty() && svgGeomsRendered_)
 	{
 		for (const auto& geometry : svgCache_->GetCache())
 		{

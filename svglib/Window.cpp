@@ -96,6 +96,14 @@ void Window::SetGraphicToLoad(std::wstring filename)
 	}
 }
 
+void Window::SetRendererStates(std::string_view resource, bool rendered)
+{
+	if (resource == "doc")
+		renderer_->SetSvgDocRendered(rendered);
+	if (resource == "geom")
+		renderer_->SetSvgGeomsRendered(rendered);
+}
+
 // Only called if CWnd::Create() is called
 int Window::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
