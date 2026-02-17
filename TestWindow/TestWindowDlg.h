@@ -38,6 +38,7 @@ public:
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedCancel();
 	afx_msg void OnBnClickedRadio1();
+	afx_msg void OnCbnSelchangeComboSvgs();
 
 	virtual void OnSvgHit(const std::wstring& id) override;
 private:
@@ -59,4 +60,5 @@ public:
 	CStatic d2dView_;
 	CStatic controlContainer_;
 	afx_msg void OnStnClickedSvgHitResult();
+	CComboBox m_comboSvg;
 };

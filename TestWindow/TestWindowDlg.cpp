@@ -35,6 +35,7 @@ public:
 // Implementation
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -67,6 +68,7 @@ void CTestWindowDlg::DoDataExchange(CDataExchange* pDX)
 	//DDX_Control(pDX, IDC_GROUP_BOX_1, controlContainer_);
 	DDX_Control(pDX, IDC_SVG_HIT_RESULT, staticHitResult_);
 	DDX_Control(pDX, IDC_CURRENT_SELECTION, currentSelection_);
+	DDX_Control(pDX, IDC_COMBO_SVGS, m_comboSvg);
 }
 
 BEGIN_MESSAGE_MAP(CTestWindowDlg, CDialogEx)
@@ -78,6 +80,7 @@ BEGIN_MESSAGE_MAP(CTestWindowDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_CANCEL, &CTestWindowDlg::OnBnClickedCancel)
 	ON_BN_CLICKED(IDC_RADIO1, &CTestWindowDlg::OnBnClickedRadio1)
 	ON_STN_CLICKED(IDC_SVG_HIT_RESULT, &CTestWindowDlg::OnStnClickedSvgHitResult)
+	ON_CBN_SELCHANGE(IDC_COMBO_SVGS, &CTestWindowDlg::OnCbnSelchangeComboSvgs)
 END_MESSAGE_MAP()
 
 
@@ -155,18 +158,16 @@ BOOL CTestWindowDlg::OnInitDialog()
 		// TODO: error handling (Initialize failed)
 	}
 
-	// **** TESTING ****	
-	//svgTestPath_ = AssetPath(L"assets\\humanBodyFront.svg");
-	svgTestPath_ = AssetPath(L"assets\\humanBodyFrontTEST.svg");
-	//svgTestPath_ = AssetPath(L"assets\\kartesianGraph.svg");
-	//svgTestPath_ = AssetPath(L"assets\\d2d_transform_test_groups.svg");
-	//svgTestPath_ = AssetPath(L"assets\\d2d_stress_test_01_paths.svg");
-	//svgTestPath_ = AssetPath(L"assets\\d2d_stress_test_01_paths_supported.svg");
-	//svgTestPath_ = AssetPath(L"assets\\d2d_stress_test_02_strokes_transforms.svg");
-	//svgTestPath_ = AssetPath(L"assets\\d2d_stress_test_03_clip.svg");
-	//svgTestPath_ = AssetPath(L"assets\\d2d_stress_test_03_clip_mask.svg");
-	// **** TESTING ****
+	m_comboSvg.AddString(L"assets\\humanBodyFront.svg");
+	m_comboSvg.AddString(L"assets\\humanBodyFrontTEST.svg");
+	m_comboSvg.AddString(L"assets\\d2d_transform_test_groups.svg");
+	m_comboSvg.AddString(L"assets\\d2d_stress_test_01_paths.svg");
+	m_comboSvg.AddString(L"assets\\d2d_stress_test_01_paths_supported.svg");
+	m_comboSvg.AddString(L"assets\\d2d_stress_test_02_strokes_transforms.svg");
+	m_comboSvg.AddString(L"assets\\d2d_stress_test_03_clip.svg");
 	
+		
+	svgTestPath_ = AssetPath(L"assets\\humanBodyFront.svg");
 	svgLibWindow_->SetGraphicToLoad(svgTestPath_);
 	svgLibWindow_->SetEventListener(this);
 	ModifyStyle(0, WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
@@ -345,4 +346,16 @@ std::wstring CTestWindowDlg::ExeDir()
 std::wstring CTestWindowDlg::AssetPath(const wchar_t* rel)
 {
 	return (std::filesystem::path(ExeDir()) / rel).wstring();
+}
+
+void CTestWindowDlg::OnCbnSelchangeComboSvgs()
+{
+	int idx = m_comboSvg.GetCurSel();
+	if (idx != CB_ERR)
+	{
+		CString file;
+		m_comboSvg.GetLBText(idx, file);
+		svgLibWindow_->SetGraphicToLoad(AssetPath(file));
+		svgLibWindow_->Invalidate();
+	}
 }

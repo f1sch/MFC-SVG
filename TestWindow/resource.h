@@ -23,6 +23,8 @@
 #define IDC_BUTTON_OK                   1012
 #define IDC_BUTTON_CANCEL               1013
 #define IDC_GROUP_BOX_1                 1015
+#define IDC_COMBO2                      1017
+#define IDC_COMBO_SVGS                  1017
 #define IDC_RENDER_WINDOW               2001
 
 // Next default values for new objects
@@ -31,7 +33,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        130
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1016
+#define _APS_NEXT_CONTROL_VALUE         1018
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
