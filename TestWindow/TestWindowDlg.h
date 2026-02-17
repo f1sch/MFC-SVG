@@ -45,12 +45,19 @@ private:
 
 	std::wstring ExeDir();
 	std::wstring AssetPath(const wchar_t* rel);
+	void CacheAnchors();
+	void UpdateAnchoredLayout(int cx, int cy);
 
 public:
 	CStatic d2dView_;
-	CComboBox m_comboSvg;
-
+	
 private:
+	CComboBox comboSvg_;
+	bool comboAnchorCached_ = false;
+	int comboMarginRight_ = 0;
+	int comboMarginTop_ = 0;
+	CSize comboSize_{ 0, 0 };
+
 	CStatic staticHitResult_;
 	CStatic currentSelection_;
 	std::wstring cachedHitId_;

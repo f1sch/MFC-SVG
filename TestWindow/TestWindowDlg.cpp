@@ -64,7 +64,7 @@ void CTestWindowDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PICTURE_CONTROL, d2dView_);
 	DDX_Control(pDX, IDC_SVG_HIT_RESULT, staticHitResult_);
 	DDX_Control(pDX, IDC_CURRENT_SELECTION, currentSelection_);
-	DDX_Control(pDX, IDC_COMBO_SVGS, m_comboSvg);
+	DDX_Control(pDX, IDC_COMBO_SVGS, comboSvg_);
 }
 
 BEGIN_MESSAGE_MAP(CTestWindowDlg, CDialogEx)
@@ -121,13 +121,13 @@ BOOL CTestWindowDlg::OnInitDialog()
 		// TODO: error handling (Initialize failed)
 	}
 
-	m_comboSvg.AddString(L"assets\\humanBodyFront.svg");
-	m_comboSvg.AddString(L"assets\\humanBodyFrontTEST.svg");
-	m_comboSvg.AddString(L"assets\\d2d_transform_test_groups.svg");
-	m_comboSvg.AddString(L"assets\\d2d_stress_test_01_paths.svg");
-	m_comboSvg.AddString(L"assets\\d2d_stress_test_01_paths_supported.svg");
-	m_comboSvg.AddString(L"assets\\d2d_stress_test_02_strokes_transforms.svg");
-	m_comboSvg.AddString(L"assets\\d2d_stress_test_03_clip.svg");
+	comboSvg_.AddString(L"assets\\humanBodyFront.svg");
+	comboSvg_.AddString(L"assets\\humanBodyFrontTEST.svg");
+	comboSvg_.AddString(L"assets\\d2d_transform_test_groups.svg");
+	comboSvg_.AddString(L"assets\\d2d_stress_test_01_paths.svg");
+	comboSvg_.AddString(L"assets\\d2d_stress_test_01_paths_supported.svg");
+	comboSvg_.AddString(L"assets\\d2d_stress_test_02_strokes_transforms.svg");
+	comboSvg_.AddString(L"assets\\d2d_stress_test_03_clip.svg");
 	
 		
 	svgTestPath_ = AssetPath(L"assets\\humanBodyFront.svg");
@@ -137,6 +137,8 @@ BOOL CTestWindowDlg::OnInitDialog()
 
 	currentSelection_.SetWindowTextW(L"Auswahl: ");
 	staticHitResult_.SetWindowTextW(L"");
+
+	CacheAnchors();
 	
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -188,6 +190,8 @@ void CTestWindowDlg::OnSize(UINT nType, int cx, int cy)
 {
 	CDialogEx::OnSize(nType, cx, cy);
 
+	UpdateAnchoredLayout(cx, cy);
+
 	// svglib
 	CWnd* pPic = GetDlgItem(IDC_PICTURE_CONTROL); 
 	if (!pPic) return;
@@ -197,6 +201,42 @@ void CTestWindowDlg::OnSize(UINT nType, int cx, int cy)
 	ScreenToClient(&rect);
 
 	svgLibWindow_.get()->MoveWindow(rect, TRUE);
+}
+
+void CTestWindowDlg::CacheAnchors()
+{
+	if (!::IsWindow(comboSvg_.m_hWnd))
+		return;
+
+	CRect client;
+	GetClientRect(&client);
+
+	CRect rcCombo;
+	comboSvg_.GetWindowRect(&rcCombo);
+	ScreenToClient(&rcCombo);
+
+	comboMarginRight_ = client.right - rcCombo.right;
+	comboMarginTop_ = rcCombo.top;
+	comboSize_ = rcCombo.Size();
+	comboAnchorCached_ = true;
+}
+
+void CTestWindowDlg::UpdateAnchoredLayout(int cx, int cy)
+{
+	if (!comboAnchorCached_ || !::IsWindow(comboSvg_.m_hWnd))
+		return;
+
+	const int left = max(0, cx - comboMarginRight_ - comboSize_.cx);
+	const int top = max(0, comboMarginTop_);
+
+	comboSvg_.SetWindowPos(
+		nullptr,
+		left,
+		top,
+		comboSize_.cx,
+		comboSize_.cy,
+		SWP_NOZORDER | SWP_NOACTIVATE
+	);
 }
 
 // The system calls this function to obtain the cursor to display while the user drags
@@ -287,11 +327,11 @@ std::wstring CTestWindowDlg::AssetPath(const wchar_t* rel)
 
 void CTestWindowDlg::OnCbnSelchangeComboSvgs()
 {
-	int idx = m_comboSvg.GetCurSel();
+	int idx = comboSvg_.GetCurSel();
 	if (idx != CB_ERR)
 	{
 		CString file;
-		m_comboSvg.GetLBText(idx, file);
+		comboSvg_.GetLBText(idx, file);
 		svgLibWindow_->SetGraphicToLoad(AssetPath(file));
 		svgLibWindow_->Invalidate();
 	}
