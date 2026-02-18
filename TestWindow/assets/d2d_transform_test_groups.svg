@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 400 300">
+<!--<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 400 300">-->
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700">
 
   <!-- Background -->
   <rect x="0" y="0" width="400" height="300" fill="#ffffff"/>

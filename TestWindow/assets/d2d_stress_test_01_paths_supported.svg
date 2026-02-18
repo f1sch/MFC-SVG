@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 200 200">
+<!--<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 200 200">-->
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
   <rect x="0" y="0" width="200" height="200" fill="#060810"/>
 
   <!-- Arc-rosette: stresses elliptical arc parsing + self overlap -->
