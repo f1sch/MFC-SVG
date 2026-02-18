@@ -1,7 +1,3 @@
-// INFO: Nuetzliche Informationen
-// WARNING: Warnungen, die kein Programmabsturz rechtfertigen
-// ERROR: Fehler, die nicht zu ignorieren sind und ein vorzeitiges return verursachen
-
 #pragma once
 
 #include <fstream>

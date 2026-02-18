@@ -121,30 +121,13 @@ namespace SvgLib::Graphics
 		Microsoft::WRL::ComPtr<IWICImagingFactory2> wicFactory_;
 		Microsoft::WRL::ComPtr<IDWriteFactory2> dwriteFactory_;
 
-		//std::wstring svgToLoad_ = L""; 
-		
-		std::wstring svgToLoad_ = L"../svglib/humanBodyFront.svg"; 
-		
-		//const wchar_t* svgToLoad_ = L"../svglib/humanBodyFront.svg"; 
-		//const wchar_t* svgToLoad_ = L"../svglib/humanBodyFrontTEST.svg"; 
-		//const wchar_t* svgToLoad_ = L"../svglib/kartesianGraph.svg"; // For testing
-
-		//const wchar_t* svgToLoad_ = L"../svglib/d2d_transform_test_groups.svg"; // For testing
-		//const wchar_t* svgToLoad_ = L"../svglib/d2d_stress_test_01_paths.svg"; // For testing
-		//const wchar_t* svgToLoad_ = L"../svglib/d2d_stress_test_01_paths_supported.svg"; // For testing
-		//const wchar_t* svgToLoad_ = L"../svglib/d2d_stress_test_02_strokes_transforms.svg"; // For testing
-		//const wchar_t* svgToLoad_ = L"../svglib/d2d_stress_test_03_clip.svg"; // For testing
-		//const wchar_t* svgToLoad_ = L"../svglib/d2d_stress_test_03_clip_mask.svg"; // For testing
-		
-		//const wchar_t* svgToLoad_ = L"../svglib/testSVGElements.svg"; // For testing
-		//const wchar_t* svgToLoad_ = L"../svglib/testingParserGenerated.svg"; // For testing
+		std::wstring svgToLoad_ = L""; 
 		
 		std::atomic<bool> deviceLostPending_{ false };
 		std::atomic<bool> recreateTargetPending_{ false };
 		std::atomic<bool> resizePending_{ false };
 
 		DeviceState state_;
-		//bool comOwned_ = false;
 		const wchar_t* fileName_;
 		bool hasBitmap_;
 		float dpi_;

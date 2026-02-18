@@ -67,7 +67,6 @@ namespace SvgLib::Window
 		BOOL mouseOver_ = FALSE;
 		std::wstring mouseOverId_;
 		bool isInitialized_;
-		//bool isGettingDestroyed_;
 	};
 
 }

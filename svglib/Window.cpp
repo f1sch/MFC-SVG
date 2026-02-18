@@ -45,7 +45,7 @@ namespace SvgLib::Window
 }
 
 Window::Window()
-	: isInitialized_(false), /*isGettingDestroyed_(false),*/ mouseOverId_(L"")
+	: isInitialized_(false), mouseOverId_(L"")
 {
 	auto& log = DebugLogger::Instance();
 	log.Info(">>>>>>>>>>>>>>>> DebugLogger started in SvgLib >>>>>>>>>>>>>>>>");
@@ -125,7 +125,6 @@ int Window::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void Window::OnDestroy()
 {
-	//isGettingDestroyed_ = true;
 	devices_->BeginShutdown();
 	
 	renderer_->ReleaseDeviceDependentResources();
@@ -142,7 +141,6 @@ void Window::OnDestroy()
 void Window::OnPaint()
 {	
 	CPaintDC dc(this);
-	//if (isGettingDestroyed_ || !renderer_) return;
 	if (!renderer_ || !devices_) return;
 	
 	HRESULT hr = devices_->ProcessPending();
@@ -187,12 +185,6 @@ void Window::OnLButtonDown(UINT nFlags, CPoint point)
 		{
 			DebugLogger::Info(std::format(L"Geometry {} was hit!", geometryId));
 		}
-		
-		//if (requestContextMenuCallback_)
-		//{
-		//	requestContextMenuCallback_(geometryId, { static_cast<int>(xDip), static_cast<int>(yDip) });
-		//}
-
 	}
 	CWnd::OnLButtonDown(nFlags, point);
 }
@@ -221,7 +213,6 @@ void Window::OnMouseMove(UINT nFlags, CPoint point)
 	{
 		TRACE(_T("Mouse enter\n"));
 		mouseOver_ = TRUE;
-		//DebugLogger::Info(std::format(L"OnMouseMove(): mouseOverId = {}", mouseOverId_));
 
 		TRACKMOUSEEVENT tme = {};
 		tme.cbSize = sizeof(tme);
@@ -245,8 +236,6 @@ LRESULT Window::OnMouseLeave(WPARAM wParam, LPARAM lParam)
 
 LRESULT Window::OnMouseHover(WPARAM wParam, LPARAM lParam)
 {
-	//TRACE(_T("Mouse hover (x=%d, y=%d)\n"),
-	//	LOWORD(lParam), HIWORD(lParam));
 	float px = (float)GET_X_LPARAM(lParam);
 	float py = (float)GET_Y_LPARAM(lParam);
 	
@@ -255,7 +244,6 @@ LRESULT Window::OnMouseHover(WPARAM wParam, LPARAM lParam)
 	float sy = 96.0f / dpi;
 
 	mouseOverId_ = renderer_->HitTesting2D(px * sx, py * sy);
-	//DebugLogger::Info(std::format(L"OnMouseHover(): mouseOverId = {}", mouseOverId_));
 	if (listener_)
 	{
 		listener_->OnSvgHit(mouseOverId_);
@@ -263,7 +251,6 @@ LRESULT Window::OnMouseHover(WPARAM wParam, LPARAM lParam)
 	if (renderer_->GetHoveredElement() != mouseOverId_)
 	{
 		renderer_->SetHoveredElement(mouseOverId_);
-		//TRACE(_T("Test inside:\n"));
 		Invalidate();
 	}
 

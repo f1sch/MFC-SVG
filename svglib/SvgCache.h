@@ -73,7 +73,6 @@ namespace SvgLib::Parser
 		ID2D1Factory* factory_ = nullptr;
 		ID2D1DeviceContext* deviceContext_ = nullptr;
 
-		// TODO: std::unordered_map<std::wstring, CacheEntry> cache_;
 		std::vector<CacheEntry> cache_;
 		SvgElementInfo image_;
 		SvgElementInfo svg_;

@@ -12,7 +12,6 @@
 #include <format>
 #include <memory>
 #include <string>
-//#include <Windows.h>
 #include <wrl/client.h>
 #include <cassert>
 
@@ -22,22 +21,11 @@ using namespace SvgLib::Core;
 using namespace SvgLib::Graphics;
 using namespace SvgLib::Parser;
 
-// ***************************************************
-// **************** Window Management ****************
-// ***************************************************
-
 std::wstring Renderer::HitTesting2D(float x, float y) const
 {
-	//float dpiX = 96.0f, dpiY = 96.0f;
-	//devices_->GetD2DDeviceContext()->GetDpi(&dpiX, &dpiY);
-	//D2D1_POINT_2F pt{ 
-	//	x * 96.0f / dpiX, 
-	//	y * 96.0f / dpiY 
-	//};
 	D2D1_POINT_2F pt{x, y};
 
 	const auto& cache = svgCache_->GetCache();
-	//for (const auto& geometry : svgCache_->GetCache())
 	for (auto it = cache.rbegin(); it != cache.rend(); ++it)
 	{
 		const auto& geometry = *it;
@@ -46,13 +34,13 @@ std::wstring Renderer::HitTesting2D(float x, float y) const
 		D2D1_MATRIX_3X2_F total = geometry.transform * worldTransform_;
 		
 		D2D1_RECT_F bounds{};
-		geometry.geometry->GetBounds(&total, &bounds);
+		HRESULT hr = geometry.geometry->GetBounds(&total, &bounds);
 		if (pt.x < bounds.left || pt.x > bounds.right || pt.y < bounds.top || pt.y > bounds.bottom)
 			continue;
 
 		BOOL hitFill = FALSE;//, hitStroke = FALSE;
 
-		HRESULT hr = geometry.geometry->FillContainsPoint(
+		hr = geometry.geometry->FillContainsPoint(
 			pt,
 			&total,//worldTransform_,
 			0.25f,
@@ -83,7 +71,7 @@ std::wstring Renderer::HitTesting2D(float x, float y) const
 		if (hitFill /* || hitStroke*/)
 			return geometry.id;
 	}
-	//DebugLogger::Info("No Geometry was hit");
+
 	return {};
 }
 
@@ -115,7 +103,6 @@ void Renderer::ToggleElementDisplay(PCWSTR id)
 		{
 			DebugLogger::Warning(std::format(L"Failed to get Element {}", id));
 			return;
-			//DebugLogger::Warning("Failed to get Element");
 		}
 		if (!toggleElement)
 			return;
@@ -125,7 +112,6 @@ void Renderer::ToggleElementDisplay(PCWSTR id)
 		if (FAILED(hr))
 		{
 			DebugLogger::Warning(std::format(L"Failed to get display value from {}", id));
-			//DebugLogger::Warning("Failed to get display value");
 		}
 		if (displayValue < 0)
 			return;
@@ -141,7 +127,6 @@ void Renderer::ToggleElementDisplay(PCWSTR id)
 		if (FAILED(hr))
 		{
 			DebugLogger::Warning(std::format(L"Failed to set display value for {}", id));
-			//DebugLogger::Warning("Failed to set display value ");
 		}
 	}
 }
@@ -198,10 +183,10 @@ HRESULT Renderer::Render(const RECT& paintRc)
 	if (state_ != RendererState::Ready)
 		return S_FALSE;
 
-	if (cacheNeedsRebuild)
+	if (cacheNeedsRebuild_)
 	{
 		svgCache_->LoadCache(devices_->GetD2DSvgDocument());
-		cacheNeedsRebuild = false;
+		cacheNeedsRebuild_ = false;
 	}
 
 #ifdef DEBUG
@@ -222,22 +207,6 @@ HRESULT Renderer::Render(const RECT& paintRc)
 	tag1++;
 
 	ctx->SetTransform(D2D1::Matrix3x2F::Identity());
-
-	// Clipping nur sinnvoll f�r Teilinvalidierungen des Renderbereichs
-	//D2D1_RECT_F clip;
-	//if (paintRc.right <= paintRc.left || paintRc.bottom <= paintRc.top)
-	//{
-	//	auto s = ctx->GetSize();
-	//	clip = D2D1::RectF(0, 0, s.width, s.height);
-	//}
-	//else
-	//{
-	//	clip = D2D1::RectF(
-	//		(FLOAT)paintRc.left, (FLOAT)paintRc.top,
-	//		(FLOAT)paintRc.right, (FLOAT)paintRc.bottom
-	//	);
-	//}
-	//ctx->PushAxisAlignedClip(clip, D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
 	
 	ctx->Clear(D2D1::ColorF(D2D1::ColorF::White));
 	tag1++;
@@ -273,12 +242,6 @@ HRESULT Renderer::Render(const RECT& paintRc)
 	{
 		for (const auto& geometry : svgCache_->GetCache())
 		{
-			//auto total = geometry.transform * worldTransform_;
-			//if (memcmp(&total, &current, sizeof(total)) != 0)
-			//{
-			//	ctx->SetTransform(total);
-			//	current = total;
-			//}
 			auto total = geometry.transform * worldTransform_;
 			ctx->SetTransform(total);
 			if (geometry.id == hoveredId_) {
@@ -302,7 +265,6 @@ HRESULT Renderer::Render(const RECT& paintRc)
 	// ^ **** static rendering **** ^
 	
 	ctx->SetTransform(D2D1::Matrix3x2F::Identity());
-	//ctx->PopAxisAlignedClip();
 	tag1++;
 	
 	HRESULT hr = ctx->EndDraw(&tag1, &tag2);
@@ -314,8 +276,6 @@ HRESULT Renderer::Render(const RECT& paintRc)
 	if (hr == D2DERR_RECREATE_TARGET)
 	{
 		DebugLogger::Warning("Presentation Error: Caller needs to recreate Rendertarget");
-		// alle D2D-Ressourcen freigeben, die von ID2D1RenderTarget abh�ngen (Bitmaps, Brushes, Layers �)
-		// RenderTarget/SwapChain/Context neu aufbauen.
 		
 		if (!devices_->IsShuttingDown())
 		{
@@ -329,7 +289,7 @@ HRESULT Renderer::Render(const RECT& paintRc)
 		return hr;
 	}
 
-	hr = devices_->GetDXGISwapChain()->Present(1, 0); //Present1()
+	hr = devices_->GetDXGISwapChain()->Present(1, 0);
 	if (hr == DXGI_ERROR_DEVICE_REMOVED || hr == DXGI_ERROR_DEVICE_RESET)
 	{
 		devices_->RequestDeviceLost();
@@ -359,7 +319,6 @@ void SvgLib::Graphics::Renderer::SetStyleAttribute(
 void Renderer::OnMouseMove(int x, int y)
 {
 	mousePos_ = D2D1::Point2F(static_cast<FLOAT>(x), static_cast<FLOAT>(y));
-	//DebugLogger::Info(std::string("Mouse move: %d,%d\n", x, y));
 }
 
 std::wstring Renderer::OnMouseDown(D2D1_POINT_2F point) const
@@ -367,10 +326,6 @@ std::wstring Renderer::OnMouseDown(D2D1_POINT_2F point) const
 	DebugLogger::Info(std::format("Point clicked: [{}|{}]", point.x, point.y));
 	return HitTesting2D(point.x, point.y);
 }
-
-// ******************************************
-// **************** Direct2D ****************
-// ******************************************
 
 Renderer::Renderer(Devices* devices)
 	:
@@ -406,10 +361,7 @@ void SvgLib::Graphics::Renderer::InitializeRenderer()
 void Renderer::ReleaseDeviceDependentResources()
 {
 	svgCache_->ClearCache();
-	cacheNeedsRebuild = true;
-	//svgCache_.release();
-	//devices_ = nullptr;
-	//devices_.reset();
+	cacheNeedsRebuild_ = true;
 }
 
 void Renderer::CreateDeviceIndependentResources()
@@ -419,11 +371,7 @@ void Renderer::CreateDeviceIndependentResources()
 
 void Renderer::CreateDeviceDependentResources()
 {
-	//if (!devices_->IsReady()) return;
-	//
-	//if (devices_->GetD2DSvgDocument() && svgCache_->IsEmpty())
-	//	svgCache_->LoadCache(devices_->GetD2DSvgDocument());
-	cacheNeedsRebuild = true;
+	cacheNeedsRebuild_ = true;
 }
 
 void Renderer::OnDeviceLost()
@@ -435,27 +383,6 @@ void Renderer::OnDeviceRestored()
 {
 	CreateDeviceDependentResources();
 }
-
-/*
-
-HRESULT Renderer::CreateGeometry()
-{
-	HRESULT hr = S_OK;
-
-	Microsoft::WRL::ComPtr<ID2D1SvgElement> root;
-	devices_->GetD2DSvgDocument()->GetRoot(&root);
-
-
-
-	// <form>-Elemente lesen
-
-	// <form>-Elemente in ID2D1Geometry umwandeln
-
-	// <form>-Elemente in cachedGeometry speichern
-
-	return hr;
-}
-*/
 
 // FIX ME: unused
 HRESULT Renderer::UpdateGeometryScale(

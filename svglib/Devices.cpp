@@ -49,39 +49,20 @@ Devices::~Devices()
 		DiscardWindowSizeDependentResources();
 		DiscardDeviceResources();
 		DiscardDeviceIndependentResources();
-		//if (comOwned_)
-		//	CoUninitialize();
 	}
 }
-// neu
+
 HRESULT Devices::Initialize(HWND hwnd)
 {
 	state_ = DeviceState::Initializing;
 
 	hwnd_ = hwnd;
-	//HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-	//if (hr == S_OK) comOwned_ = true;
-	//else if (hr == S_FALSE)
-	//{
-	//	//DebugLogger::Warning("CoInitialize failed in Devices::Initialize()");
-	//	DebugLogger::Info("COM-Library already initialized in this thread.");
-	//}
-	//else if (hr == RPC_E_CHANGED_MODE)
-	//{
-	//	state_ = DeviceState::Failed;
-	//	return hr;
-	//}
-	//else if (FAILED(hr))
-	//{
-	//	state_ = DeviceState::Failed;
-	//	return hr;
-	//}
+	
 	auto fail = [&](HRESULT e) {
 		DiscardWindowSizeDependentResources();
 		DiscardDeviceResources();
 		DiscardDeviceIndependentResources();
 		state_ = DeviceState::Failed;
-		//if (comOwned_) CoUninitialize();
 		return e;
 	};
 
@@ -98,47 +79,6 @@ HRESULT Devices::Initialize(HWND hwnd)
 	
 	return S_OK;
 }
-
-// alt
-//HRESULT Devices::Initialize(HWND hwnd)
-//{
-//	state_ = DeviceState::Initializing;
-//
-//	hwnd_ = hwnd;
-//	// Library can only be used by a MFC apllication.
-//	// COM must already be initialized
-//	//HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-//	//if (hr == S_OK) comOwned_ = true;
-//	//else if (hr == S_FALSE)
-//	//{
-//	//	DebugLogger::Info("COM-Library already initialized in this thread.");
-//	//}
-//	//else if (hr == RPC_E_CHANGED_MODE)
-//	//{
-//	//	state_ = DeviceState::Failed;
-//	//	DebugLogger::Warning("CoInitialize failed in Devices::Initialize() -> RPC_E_CHANGED_MODE");
-//	//	return hr;
-//	//}
-//	//else if (FAILED(hr))
-//	//{
-//	//	state_ = DeviceState::Failed;
-//	//	DebugLogger::Warning("CoInitialize failed in Devices::Initialize()");
-//	//	return hr;
-//	//}
-//	
-//	HRESULT hr = CreateDeviceIndependentResources();
-//	if (FAILED(hr)) return hr;
-//
-//	hr = CreateDeviceResources();
-//	if (FAILED(hr)) return hr;
-//
-//	hr = CreateWindowSizeDependentResources();
-//	if (FAILED(hr)) return hr;
-//
-//	state_ = DeviceState::Ready;
-//
-//	return S_OK;
-//}
 
 HRESULT Devices::CreateDeviceIndependentResources()
 {
@@ -488,7 +428,6 @@ void Devices::DiscardWindowSizeDependentResources()
 	d2dLoadedBitmap_.Reset();
 }
 
-// TODO: ist das besser im Renderer aufgehoben?
 HRESULT Devices::CreateSvgDocument()
 {
 	RECT rect;
@@ -641,7 +580,7 @@ HRESULT Devices::SetSwapChainBackBuffer()
 
 	HRESULT hr = S_FALSE;
 	Microsoft::WRL::ComPtr<IDXGISurface2> dxgiSurface;
-	hr = dxgiSwapchain_->GetBuffer(0, IID_PPV_ARGS(&dxgiSurface)); // FIXME: look up function params
+	hr = dxgiSwapchain_->GetBuffer(0, IID_PPV_ARGS(&dxgiSurface));
 	if (FAILED(hr))
 	{
 		DebugLogger::Error("Failed to get Buffer for DXGISwapchain");

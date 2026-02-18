@@ -47,8 +47,7 @@ namespace SvgLib::Graphics
 	
 		void OnMouseMove(int x, int y);
 		std::wstring OnMouseDown(D2D1_POINT_2F point) const;
-		void OnMenuRange(UINT nID);
-
+	
 		// IDeviceNotifiy methods handle device lost and restored
 		void OnDeviceLost() override;
 		void OnDeviceRestored() override;
@@ -69,7 +68,7 @@ namespace SvgLib::Graphics
 
 		bool inDraw_ = false; // debug
 
-		bool cacheNeedsRebuild = false;
+		bool cacheNeedsRebuild_ = false;
 		float scale_;
 		float currentScale_;
 		D2D1_POINT_2F currentOffset_;
@@ -82,7 +81,7 @@ namespace SvgLib::Graphics
 		Devices* devices_;
 
 		std::unique_ptr<SvgLib::Parser::SvgCache> svgCache_;
-		// TODO: add vars to specify what is rendered
+
 		bool svgDocRendered_ = true;
 		bool svgGeomsRendered_ = true;
 	};

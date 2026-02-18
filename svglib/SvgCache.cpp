@@ -12,10 +12,7 @@ void SvgCache::LoadCache(ID2D1SvgDocument* doc)
 	Microsoft::WRL::ComPtr<ID2D1SvgElement> root;
 	doc->GetRoot(root.GetAddressOf());
 	if (!root) return;
-	// nicht jedes svg hat viewport-attribut
-	//D2D1_SIZE_F viewport = doc->GetViewportSize();
-	//svg_.width = viewport.width;
-	//svg_.height = viewport.height;
+	
 	cache_.clear();
 	
 	ReadSvgElement(root.Get(), svg_);
@@ -54,11 +51,6 @@ void SvgCache::TraverseElement(ID2D1SvgElement* element, const D2D1_MATRIX_3X2_F
 
 	while (child)
 	{
-		//HandleElement(child.Get());
-
-		//Microsoft::WRL::ComPtr<ID2D1SvgElement> firstGrandChild;
-		//child->GetFirstChild(firstGrandChild.GetAddressOf());
-
 		TraverseElement(child.Get(), cumulativeTransform);
 
 		Microsoft::WRL::ComPtr<ID2D1SvgElement> next;
@@ -76,9 +68,7 @@ D2D1_MATRIX_3X2_F SvgCache::HandleElement(ID2D1SvgElement* element, const D2D1_M
 	std::wstring tag = {};
 	if (nameLen > 0)
 	{
-		//tag.resize(nameLen + 1);
 		tag.resize(nameLen);
-		//element->GetTagName(&tag[0], nameLen + 1);
 		element->GetTagName(tag.data(), nameLen + 1);
 	}
 
@@ -107,21 +97,10 @@ D2D1_MATRIX_3X2_F SvgCache::HandleElement(ID2D1SvgElement* element, const D2D1_M
 				buf[lenChars] = L'\0';
 				id = buf.c_str();
 			}
-			//elemInfo.id = id;
 		}
 	}
 	const D2D1_MATRIX_3X2_F local = ReadTransformOrIdentity(element);
 	const D2D1_MATRIX_3X2_F cumulative = local * parentMatrix;
-
-	// TODO: diese Funktion wird hier nie angesteuert, weil ich oben in TraverseElement() mit dem Kind beginne.
-	// der wurzelknoten <svg> wird also niemals traversiert
-	// Update: <svg> muss kein wurzelknoten sein. Es koennen auch mehrere <svg> in einem dokument vorkommen
-	//using SvgHandler = void (SvgCache::*)(ID2D1SvgElement*, SvgElementInfo&);
-	//static const std::unordered_map<std::wstring, SvgHandler> svgHandlers =
-	//{
-	//	{L"svg",		&SvgCache::ReadSvgElement}
-	//	//{L"image",		&SvgCache::ReadImageElement}
-	//};
 	
 	using SvgGeometryHandler = Microsoft::WRL::ComPtr<ID2D1Geometry>(SvgCache::*)(ID2D1SvgElement*);
 	static const std::unordered_map<std::wstring, SvgGeometryHandler> handlers =
@@ -149,18 +128,11 @@ D2D1_MATRIX_3X2_F SvgCache::HandleElement(ID2D1SvgElement* element, const D2D1_M
 		return cumulative;
 	}
 	
-	//OutputDebugStringW((L"TAG: [" + tag + L"]\n").c_str());
-	
 	Microsoft::WRL::ComPtr<ID2D1Geometry> geometry = nullptr;
 	if (auto it = handlers.find(tag); it != handlers.end())
 	{
 		geometry = (this->*(it->second))(element);
 	}
-	// muss rein, wenn die svgHandlers map genutzt werden soll
-	//else if (auto it2 = svgHandlers.find(tag); it2 != svgHandlers.end())
-	//{
-	//	(this->*(it2->second))(element, svg_); // TODO: svg_ ist hardcoded. Hier sollte ein beliebiges elem rein koennen
-	//}
 	else
 	{
 		SvgLib::Core::DebugLogger::Info(std::format(L"Unsupported SVG tag: <{}>", tag));
@@ -176,10 +148,7 @@ D2D1_MATRIX_3X2_F SvgCache::HandleElement(ID2D1SvgElement* element, const D2D1_M
 	}
 	return cumulative;
 }
-// TODO: fuer die folgenden CreateXXX Funktionen: 
-// - stroke lesen: ID2D1Brush mit der Farbe nutzen
-// - fill lesen: ist die Geometrie ausgefuellt oder leer?
-// <path style="display:inline;fill:#7b5427;fill-opacity:1;stroke-width:1.0" ...>
+
 Microsoft::WRL::ComPtr<ID2D1Geometry> SvgCache::CreateGeometryFromPath(
 	ID2D1SvgElement* element)
 {
@@ -581,11 +550,6 @@ void SvgCache::ReadGroupElement(ID2D1SvgElement* element, const RenderState& par
 	// Group transform
 	D2D1_MATRIX_3X2_F groupTransform = ReadTransformOrIdentity(element);
 	childState.transform = parent.transform * groupTransform;
-
-	//Microsoft::WRL::ComPtr<ID2D1SvgElement> child;
-	//element->GetFirstChild(child.GetAddressOf());
-
-	//TraverseElement(element);
 }
 
 D2D1_MATRIX_3X2_F SvgLib::Parser::SvgCache::ReadTransformOrIdentity(ID2D1SvgElement* element)
@@ -719,9 +683,6 @@ void SvgCache::MapSvgCommandsToSink(
 				const bool relative =
 					(cmd == D2D1_SVG_PATH_COMMAND_ARC_RELATIVE);
 
-				// rx ry x-axis-rotation large-arc-flag sweep-flag x y
-				// die flags koennen als '?' vorkommen:
-				// <path d="M 125,75 a100,50 0 ?,? 100,50">
 				float rx = data[di++], ry = data[di++], xAxisRotation = data[di++];
 				float largeArcFlag = data[di++], sweepFlag = data[di++];
 				float x = data[di++], y = data[di++];
