@@ -53,51 +53,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="d2d_stress_test_01_paths.svg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="d2d_stress_test_01_paths_supported.svg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="d2d_stress_test_02_strokes_transforms.svg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="d2d_stress_test_03_clip.svg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="d2d_stress_test_03_clip_mask.svg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="d2d_transform_test_groups.svg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Ghostscript_Tiger.svg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="humanBodyFront.svg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="humanBodyFrontTEST.svg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="testSVGElements.svg">
-      <Filter>Assets</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Header Files">
       <UniqueIdentifier>{64bfcab4-8af5-4f09-b07b-1c705f94919f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{84322ad0-cdd3-4b6f-905a-5fd9713dca44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets">
-      <UniqueIdentifier>{4a4b8d2c-e0f1-4c38-8540-20d935262023}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="humanBodyFront.png">
-      <Filter>Assets</Filter>
-    </Image>
   </ItemGroup>
 </Project>

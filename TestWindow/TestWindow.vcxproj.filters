@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="assets">
+    <Filter Include="Assets">
       <UniqueIdentifier>{dba2c076-ec23-450c-af71-24face4beb65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -65,28 +65,31 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="assets\d2d_stress_test_01_paths.svg">
-      <Filter>assets</Filter>
+      <Filter>Assets</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="assets\d2d_stress_test_01_paths_supported.svg">
-      <Filter>assets</Filter>
+      <Filter>Assets</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="assets\d2d_stress_test_02_strokes_transforms.svg">
-      <Filter>assets</Filter>
+      <Filter>Assets</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="assets\d2d_stress_test_03_clip.svg">
-      <Filter>assets</Filter>
+      <Filter>Assets</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="assets\d2d_stress_test_03_clip_mask.svg">
-      <Filter>assets</Filter>
+      <Filter>Assets</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="assets\d2d_transform_test_groups.svg">
-      <Filter>assets</Filter>
+      <Filter>Assets</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="assets\humanBodyFront.svg">
-      <Filter>assets</Filter>
+      <Filter>Assets</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="assets\humanBodyFrontTEST.svg">
-      <Filter>assets</Filter>
+      <Filter>Assets</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\Ghostscript_Tiger.svg">
+      <Filter>Assets</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
