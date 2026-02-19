@@ -124,13 +124,14 @@
 #define ID_AMPUTATION_FUSS              32863
 #define ID_ROENTGEN_FUSS                32864
 #define ID_DOKUMENTATION_MASSNAHME      32865
+#define ID_CHIRURGISCHEMA_WUNDREVISION  32867
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        131
-#define _APS_NEXT_COMMAND_VALUE         32866
+#define _APS_NEXT_COMMAND_VALUE         32868
 #define _APS_NEXT_CONTROL_VALUE         1020
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

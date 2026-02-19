@@ -30,6 +30,67 @@ public:
 	afx_msg void OnBnClickedCheckDoc();
 	afx_msg void OnBnClickedCheckGeom();
 
+	// Testing negative example
+	afx_msg void OnBlutdruckMessen();
+	afx_msg void OnPulsMessen();
+	afx_msg void OnSauerstoffMessen();
+	afx_msg void OnTemperaturMessen();
+	afx_msg void OnPupillenreaktionPruefen();
+	afx_msg void OnBewusstseinslageBeurteilen();
+	afx_msg void OnArmbewegelichkeitTesten();
+	afx_msg void OnBeinkraftTesten();
+	afx_msg void OnFussreflexPruefen();
+	afx_msg void OnHautinspektion();
+	afx_msg void OnSchwellungPruefen();
+	afx_msg void OnInspektionWundkontrolle();
+	afx_msg void OnInspektionDeformitPruefen();
+	afx_msg void OnKatheterBlasenkatheterLegen();
+	afx_msg void OnKatheterZVKLegen();
+	afx_msg void OnArteriellezugangLegenRadialis();
+	afx_msg void OnArteriellezugangLegenFemoralis();
+	afx_msg void OnInjektionIntramuskulaerDeltamuskel();
+	afx_msg void OnInjektionIntramuskulaerGluteal();
+	afx_msg void OnInjektionIntramuskulaerVastuslateralis();
+	afx_msg void OnInjektionSubkutanAbdomen();
+	afx_msg void OnInjektionSubkutanOberarm();
+	afx_msg void OnInjektionSubkutanOberschenkel();
+	afx_msg void OnZugangLegenHandvene();
+	afx_msg void OnZugangLegenUnterarmvene();
+	afx_msg void OnIntravenoesMedikamentApplizieren();
+	afx_msg void OnDrainagenThoraxDrainage();
+	afx_msg void OnDrainagenWundDrainage();
+	afx_msg void OnVerbandstechnikenKopfverband();
+	afx_msg void OnVerbandstechnikenSchulterverband();
+	afx_msg void OnVerbandstechnikenArmverband();
+	afx_msg void OnVerbandstechnikenBeinverband();
+	afx_msg void OnVerbandstechnikenFussverband();
+	afx_msg void OnRuhigstellungArmschienenAnlegen();
+	afx_msg void OnRuhigstellungBeinschienenAnlegen();
+	afx_msg void OnRuhigstellungHalskrauseAnlegen();
+	afx_msg void OnKuehlungKuehlpackungAuflegen();
+	afx_msg void OnKuehlungWaermepackungAuflegen();
+	afx_msg void OnHochlagernArmHochlagern();
+	afx_msg void OnHochlagernBeinHochLagern();
+	afx_msg void OnNahtHautnaht();
+	afx_msg void OnNahtKlammernSetzen();
+	afx_msg void OnNahtFaedenEntfernen();
+	afx_msg void OnAmputationArm();
+	afx_msg void OnAmputationBein();
+	afx_msg void OnAmputationFuss();
+	afx_msg void OnChirurgischeMassnahmeWundrevision();
+	afx_msg void OnRoentgenSchaedel();
+	afx_msg void OnRoentgenThorax();
+	afx_msg void OnRoentgenArm();
+	afx_msg void OnRoentgenBein();
+	afx_msg void OnRoentgenFuss();
+	afx_msg void OnBildgebungCT();
+	afx_msg void OnBildgebungMRT();
+	afx_msg void OnDokumentationMassnahme();
+	afx_msg void OnDokumentationVerlaufEintragen();
+	afx_msg void OnDokumentationFotoHinzufuegen();
+	afx_msg void OnDokumentationBerichtExportieren();
+
+
 protected:
 	HICON m_hIcon;
 
@@ -39,6 +100,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg HCURSOR OnQueryDragIcon();
+	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
 
 private:

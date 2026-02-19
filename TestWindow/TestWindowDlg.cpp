@@ -82,6 +82,66 @@ BEGIN_MESSAGE_MAP(CTestWindowDlg, CDialogEx)
 	ON_CBN_SELCHANGE(IDC_COMBO_SVGS, &CTestWindowDlg::OnCbnSelchangeComboSvgs)
 	ON_BN_CLICKED(IDC_CHECK_DOC, &CTestWindowDlg::OnBnClickedCheckDoc)
 	ON_BN_CLICKED(IDC_CHECK_GEOM, &CTestWindowDlg::OnBnClickedCheckGeom)
+	ON_WM_CONTEXTMENU()
+	// Testing negative example
+	ON_COMMAND(ID_VITALPARAMETER_BLUTDRUCKMESSEN, &CTestWindowDlg::OnBlutdruckMessen)
+	ON_COMMAND(ID_VITALPARAMETER_PULSMESSEN, &CTestWindowDlg::OnPulsMessen)
+	ON_COMMAND(ID_VITALPARAMETER_SAUERSTOFFMESSEN, &CTestWindowDlg::OnSauerstoffMessen)
+	ON_COMMAND(ID_VITALPARAMETER_TEMPERATURMESSEN, &CTestWindowDlg::OnTemperaturMessen)
+	ON_COMMAND(ID_NEUROLOGISCHEUNTERSUCHUNG_PUPILLENREAKTIONPRUEFEN, &CTestWindowDlg::OnPupillenreaktionPruefen)
+	ON_COMMAND(ID_NEUROLOGISCHEUNTERSUCHUNG_BEWUSSTSEINSLAGEBEURTEILEN, &CTestWindowDlg::OnBewusstseinslageBeurteilen)
+	ON_COMMAND(ID_MOTORIKTESTEN_ARMBEWEGLICHKEITTESTEN, &CTestWindowDlg::OnArmbewegelichkeitTesten)
+	ON_COMMAND(ID_MOTORIKTESTEN_BEINKRAFTTESTEN, &CTestWindowDlg::OnBeinkraftTesten)
+	ON_COMMAND(ID_MOTORIKTESTEN_FUSSREFLEXPRUEFEN, &CTestWindowDlg::OnFussreflexPruefen)
+	ON_COMMAND(ID_INSPEKTION_HAUTINSPEKTION, &CTestWindowDlg::OnHautinspektion)
+	ON_COMMAND(ID_INSPEKTION_SCHWELLUNGPRUEFEN, &CTestWindowDlg::OnSchwellungPruefen)
+	ON_COMMAND(ID_INSPEKTION_WUNDKONTROLLE, &CTestWindowDlg::OnInspektionWundkontrolle)
+	ON_COMMAND(ID_INSPEKTION_DEFORMITPRUEFEN, &CTestWindowDlg::OnInspektionDeformitPruefen)
+	ON_COMMAND(ID_KATHETER_BLASENKATHETERLEGEN, &CTestWindowDlg::OnKatheterBlasenkatheterLegen)
+	ON_COMMAND(ID_KATHETER_ZVKLEGEN, &CTestWindowDlg::OnKatheterZVKLegen)
+	ON_COMMAND(ID_ARTERIELLEZUGANGLEGEN_RADIALIS, &CTestWindowDlg::OnArteriellezugangLegenRadialis)
+	ON_COMMAND(ID_ARTERIELLEZUGANGLEGEN_FEMORALIS, &CTestWindowDlg::OnArteriellezugangLegenFemoralis)
+	ON_COMMAND(ID_INTRAMUSKULAER_DELTAMUSKEL, &CTestWindowDlg::OnInjektionIntramuskulaerDeltamuskel)
+	ON_COMMAND(ID_INTRAMUSKULAER_GLUTEAL, &CTestWindowDlg::OnInjektionIntramuskulaerGluteal)
+	ON_COMMAND(ID_INTRAMUSKULAER_VASTUSLATERALIS, &CTestWindowDlg::OnInjektionIntramuskulaerVastuslateralis)
+	ON_COMMAND(ID_SUBKUTAN_ABDOMEN, &CTestWindowDlg::OnInjektionSubkutanAbdomen)
+	ON_COMMAND(ID_SUBKUTAN_OBERARM, &CTestWindowDlg::OnInjektionSubkutanOberarm)
+	ON_COMMAND(ID_SUBKUTAN_OBERSCHENKEL, &CTestWindowDlg::OnInjektionSubkutanOberschenkel)
+	ON_COMMAND(ID_ZUGANGLEGEN_HANDVENE, &CTestWindowDlg::OnZugangLegenHandvene)
+	ON_COMMAND(ID_ZUGANGLEGEN_UNTERARMVENE, &CTestWindowDlg::OnZugangLegenUnterarmvene)
+	ON_COMMAND(ID_INTRAVENOES_MEDIKAMENTAPPLIZIEREN, &CTestWindowDlg::OnIntravenoesMedikamentApplizieren)
+	ON_COMMAND(ID_DRAINAGEN_THORAXDRAINAGE, &CTestWindowDlg::OnDrainagenThoraxDrainage)
+	ON_COMMAND(ID_DRAINAGEN_WUNDDRAINAGE, &CTestWindowDlg::OnDrainagenWundDrainage)
+	ON_COMMAND(ID_VERBANDSTECHNIKEN_KOPFVERBAND, &CTestWindowDlg::OnVerbandstechnikenKopfverband)
+	ON_COMMAND(ID_VERBANDSTECHNIKEN_SCHULTERVERBAND, &CTestWindowDlg::OnVerbandstechnikenSchulterverband)
+	ON_COMMAND(ID_VERBANDSTECHNIKEN_ARMVERBAND, &CTestWindowDlg::OnVerbandstechnikenArmverband)
+	ON_COMMAND(ID_VERBANDSTECHNIKEN_BEINVERBAND, &CTestWindowDlg::OnVerbandstechnikenBeinverband)
+	ON_COMMAND(ID_VERBANDSTECHNIKEN_FUSSVERBAND, &CTestWindowDlg::OnVerbandstechnikenFussverband)
+	ON_COMMAND(ID_RUHIGSTELLUNG_ARMSCHIENEANLEGEN, &CTestWindowDlg::OnRuhigstellungArmschienenAnlegen)
+	ON_COMMAND(ID_RUHIGSTELLUNG_BEINSCHIENEANLEGEN, &CTestWindowDlg::OnRuhigstellungBeinschienenAnlegen)
+	ON_COMMAND(ID_RUHIGSTELLUNG_HALSKRAUSEANLEGEN, &CTestWindowDlg::OnRuhigstellungHalskrauseAnlegen)
+	ON_COMMAND(ID_KUEHLUNG_KUEHLPACKAUFLEGEN, &CTestWindowDlg::OnKuehlungKuehlpackungAuflegen)
+	ON_COMMAND(ID_KUEHLUNG_WAERMEPACKAUFLEGEN, &CTestWindowDlg::OnKuehlungWaermepackungAuflegen)
+	ON_COMMAND(ID_HOCHLAGERN_ARMHOCHLAGERN, &CTestWindowDlg::OnHochlagernArmHochlagern)
+	ON_COMMAND(ID_HOCHLAGERN_BEINHOCHLAGERN, &CTestWindowDlg::OnHochlagernBeinHochLagern)
+	ON_COMMAND(ID_NAHT_HAUTNAHT, &CTestWindowDlg::OnNahtHautnaht)
+	ON_COMMAND(ID_NAHT_KLAMMERNSETZEN, &CTestWindowDlg::OnNahtKlammernSetzen)
+	ON_COMMAND(ID_NAHT_FAEDENENTFERNEN, &CTestWindowDlg::OnNahtFaedenEntfernen)
+	ON_COMMAND(ID_AMPUTATION_ARM, &CTestWindowDlg::OnAmputationArm)
+	ON_COMMAND(ID_AMPUTATION_BEIN, &CTestWindowDlg::OnAmputationBein)
+	ON_COMMAND(ID_AMPUTATION_FUSS, &CTestWindowDlg::OnAmputationFuss)
+	ON_COMMAND(ID_CHIRURGISCHEMA32835, &CTestWindowDlg::OnChirurgischeMassnahmeWundrevision)
+	ON_COMMAND(ID_ROENTGEN_SCHAEDEL, &CTestWindowDlg::OnRoentgenSchaedel)
+	ON_COMMAND(ID_ROENTGEN_THORAX, &CTestWindowDlg::OnRoentgenThorax)
+	ON_COMMAND(ID_ROENTGEN_ARM, &CTestWindowDlg::OnRoentgenArm)
+	ON_COMMAND(ID_ROENTGEN_BEIN, &CTestWindowDlg::OnRoentgenBein)
+	ON_COMMAND(ID_ROENTGEN_FUSS, &CTestWindowDlg::OnRoentgenFuss)
+	ON_COMMAND(ID_BILDGEBUNG_CT, &CTestWindowDlg::OnBildgebungCT)
+	ON_COMMAND(ID_BILDGEBUNG_MRT, &CTestWindowDlg::OnBildgebungMRT)
+	ON_COMMAND(ID_DOKUMENTATION_MASSNAHME, &CTestWindowDlg::OnDokumentationMassnahme)
+	ON_COMMAND(ID_DOKUMENTATION_VERLAUFEINTRAGEN, &CTestWindowDlg::OnDokumentationVerlaufEintragen)
+	ON_COMMAND(ID_DOKUMENTATION_FOTOHINZUFUEGEN, &CTestWindowDlg::OnDokumentationFotoHinzufuegen)
+	ON_COMMAND(ID_DOKUMENTATION_BERICHTEXPORTIEREN, &CTestWindowDlg::OnDokumentationBerichtExportieren)
 END_MESSAGE_MAP()
 
 
@@ -418,3 +478,308 @@ void CTestWindowDlg::OnBnClickedCheckGeom()
 	svgLibWindow_->Invalidate();
 }
 
+void CTestWindowDlg::OnContextMenu(CWnd* pWnd, CPoint point)
+{
+	CMenu menu;
+	menu.LoadMenuW(IDR_NEGATIVE_CONTEXT_MENU);
+
+	CMenu* pPopup = menu.GetSubMenu(0);
+	if (pPopup != nullptr)
+	{
+		pPopup->TrackPopupMenu(
+			TPM_LEFTALIGN | TPM_RIGHTBUTTON,
+			point.x,
+			point.y,
+			this
+		);
+	}
+}
+
+void CTestWindowDlg::OnBlutdruckMessen()
+{
+	AfxMessageBox(L"Blutdruck messen gewählt");
+}
+
+void CTestWindowDlg::OnPulsMessen()
+{
+	AfxMessageBox(L"Puls messen gewählt");
+}
+
+void CTestWindowDlg::OnSauerstoffMessen()
+{
+	AfxMessageBox(L"Sauerstoff messen gewählt");
+}
+
+void CTestWindowDlg::OnTemperaturMessen()
+{
+	AfxMessageBox(L"Temperatur messen gewählt");
+}
+
+void CTestWindowDlg::OnPupillenreaktionPruefen()
+{
+	AfxMessageBox(L"Pupillenreaktion pruefen gewählt");
+}
+
+void CTestWindowDlg::OnBewusstseinslageBeurteilen()
+{
+	AfxMessageBox(L"Bewusstseinslage beurteilen gewählt");
+}
+
+void CTestWindowDlg::OnArmbewegelichkeitTesten()
+{
+	AfxMessageBox(L"Armbeweglichkeit testen gewählt");
+}
+
+void CTestWindowDlg::OnBeinkraftTesten()
+{
+	AfxMessageBox(L"Beinkraft testen gewählt");
+}
+
+void CTestWindowDlg::OnFussreflexPruefen()
+{
+	AfxMessageBox(L"Fussreflex pruefen gewählt");
+}
+
+void CTestWindowDlg::OnHautinspektion()
+{
+	AfxMessageBox(L"Hautinspektion gewählt");
+}
+
+void CTestWindowDlg::OnSchwellungPruefen()
+{
+	AfxMessageBox(L"Schwellung pruefen gewählt");
+}
+
+void CTestWindowDlg::OnInspektionWundkontrolle()
+{
+	AfxMessageBox(L"Inspektion Wundkontrolle gewählt");
+}
+
+void CTestWindowDlg::OnInspektionDeformitPruefen()
+{
+	AfxMessageBox(L"Inspektion Deformit pruefen gewählt");
+}
+
+void CTestWindowDlg::OnKatheterBlasenkatheterLegen()
+{
+	AfxMessageBox(L"Blasenkatheter legen gewählt");
+}
+
+void CTestWindowDlg::OnKatheterZVKLegen()
+{
+	AfxMessageBox(L"ZVK legen gewählt");
+}
+void CTestWindowDlg::OnArteriellezugangLegenRadialis()
+{
+	AfxMessageBox(L"Arterieller Zugang legen Radialis punktieren gewählt");
+}
+
+void CTestWindowDlg::OnArteriellezugangLegenFemoralis()
+{
+	AfxMessageBox(L"Arterieller Zugang legen Femoralis punktieren gewählt");
+}
+
+void CTestWindowDlg::OnInjektionIntramuskulaerDeltamuskel()
+{
+	AfxMessageBox(L"Injektion intramuskulaer Deltamuskel gewählt");
+}
+
+void CTestWindowDlg::OnInjektionIntramuskulaerGluteal()
+{
+	AfxMessageBox(L"Injektion intramuskulaer Gluteal gewählt");
+}
+
+void CTestWindowDlg::OnInjektionIntramuskulaerVastuslateralis()
+{
+	AfxMessageBox(L"Injektion intramuskulaer Vastus lateralis gewählt");
+}
+
+void CTestWindowDlg::OnInjektionSubkutanAbdomen()
+{
+	AfxMessageBox(L"Injektion subkutan Abdomen gewählt");
+}
+
+void CTestWindowDlg::OnInjektionSubkutanOberarm()
+{
+	AfxMessageBox(L"Injektion subkutan Oberarm gewählt");
+}
+
+void CTestWindowDlg::OnInjektionSubkutanOberschenkel()
+{
+	AfxMessageBox(L"Injektion subkutan Oberschenkel gewählt");
+}
+
+void CTestWindowDlg::OnZugangLegenHandvene()
+{
+	AfxMessageBox(L"Zugang legen Handvene gewählt");
+}
+
+void CTestWindowDlg::OnZugangLegenUnterarmvene()
+{
+	AfxMessageBox(L"Zugang legen Unterarmvene gewählt");
+}
+
+void CTestWindowDlg::OnIntravenoesMedikamentApplizieren()
+{
+	AfxMessageBox(L"Intravenoes Medikament applizieren gewählt");
+}
+
+void CTestWindowDlg::OnDrainagenThoraxDrainage()
+{
+	AfxMessageBox(L"Thoraxdrainage gewählt");
+}
+
+void CTestWindowDlg::OnDrainagenWundDrainage()
+{
+	AfxMessageBox(L"Wunddrainage gewählt");
+}
+
+void CTestWindowDlg::OnVerbandstechnikenKopfverband()
+{
+	AfxMessageBox(L"Kopfverband gewählt");
+}
+
+void CTestWindowDlg::OnVerbandstechnikenSchulterverband()
+{
+	AfxMessageBox(L"Schulterverband gewählt");
+}
+
+void CTestWindowDlg::OnVerbandstechnikenArmverband()
+{
+	AfxMessageBox(L"Armverband gewählt");
+}
+
+void CTestWindowDlg::OnVerbandstechnikenBeinverband()
+{
+	AfxMessageBox(L"Beinverband gewählt");
+}
+
+void CTestWindowDlg::OnVerbandstechnikenFussverband()
+{
+	AfxMessageBox(L"Fussverband gewählt");
+}
+
+void CTestWindowDlg::OnRuhigstellungArmschienenAnlegen()
+{
+	AfxMessageBox(L"Ruhigstellung Armschienen anlegen gewählt");
+}
+
+void CTestWindowDlg::OnRuhigstellungBeinschienenAnlegen()
+{
+	AfxMessageBox(L"Ruhigstellung Beinschienen anlegen gewählt");
+}
+
+void CTestWindowDlg::OnRuhigstellungHalskrauseAnlegen()
+{
+	AfxMessageBox(L"Ruhigstellung Halskrause anlegen gewählt");
+}
+
+void CTestWindowDlg::OnKuehlungKuehlpackungAuflegen()
+{
+	AfxMessageBox(L" Kuehlpackung auflegen gewählt");
+}
+
+void CTestWindowDlg::OnKuehlungWaermepackungAuflegen()
+{
+	AfxMessageBox(L"Waermepackung auflegen gewählt");
+}
+
+void CTestWindowDlg::OnHochlagernArmHochlagern()
+{
+	AfxMessageBox(L"Arm hochlagern gewählt");
+}
+
+void CTestWindowDlg::OnHochlagernBeinHochLagern()
+{
+	AfxMessageBox(L"Bein hochlagern gewählt");
+}
+
+void CTestWindowDlg::OnNahtHautnaht()
+{
+	AfxMessageBox(L"Hautnaht gewählt");
+}
+
+void CTestWindowDlg::OnNahtKlammernSetzen()
+{
+	AfxMessageBox(L"Naht Klammern setzen gewählt");
+}
+
+void CTestWindowDlg::OnNahtFaedenEntfernen()
+{
+	AfxMessageBox(L"Naht Faeden entfernen gewählt");
+}
+
+void CTestWindowDlg::OnAmputationArm()
+{
+	AfxMessageBox(L"Amputation Arm gewählt");
+}
+
+void CTestWindowDlg::OnAmputationBein()
+{
+	AfxMessageBox(L"Amputation Bein gewählt");
+}
+
+void CTestWindowDlg::OnAmputationFuss()
+{
+	AfxMessageBox(L"Amputation Fuss gewählt");
+}
+
+void CTestWindowDlg::OnChirurgischeMassnahmeWundrevision()
+{
+	AfxMessageBox(L"Wundrevision gewählt");
+}
+
+void CTestWindowDlg::OnRoentgenSchaedel()
+{
+	AfxMessageBox(L"Schaedel roentgen gewählt");
+}
+
+void CTestWindowDlg::OnRoentgenThorax()
+{
+	AfxMessageBox(L"Thorax roentgen gewählt");
+}
+
+void CTestWindowDlg::OnRoentgenArm()
+{
+	AfxMessageBox(L"Arm roentgen gewählt");
+}
+
+void CTestWindowDlg::OnRoentgenBein()
+{
+	AfxMessageBox(L"Bein roentgen gewählt");
+}
+
+void CTestWindowDlg::OnRoentgenFuss()
+{
+	AfxMessageBox(L"Fuss roentgen gewählt");
+}
+
+void CTestWindowDlg::OnBildgebungCT()
+{
+	AfxMessageBox(L"CT Bildgebung gewählt");
+}
+
+void CTestWindowDlg::OnBildgebungMRT()
+{
+	AfxMessageBox(L"MRT Bildgebung gewählt");
+}
+
+void CTestWindowDlg::OnDokumentationMassnahme()
+{
+	AfxMessageBox(L"Dokumentation Massnahme gewählt");
+}
+
+void CTestWindowDlg::OnDokumentationVerlaufEintragen()
+{
+	AfxMessageBox(L"Dokumentation Verlauf eintragen gewählt");
+}
+
+void CTestWindowDlg::OnDokumentationFotoHinzufuegen()
+{
+	AfxMessageBox(L"Dokumentation Foto hinzufuegen gewählt");
+}
+
+void CTestWindowDlg::OnDokumentationBerichtExportieren()
+{
+	AfxMessageBox(L"Dokumentation Bericht exportieren gewählt");
+}
