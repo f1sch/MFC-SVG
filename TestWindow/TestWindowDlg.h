@@ -6,6 +6,7 @@
 
 #include "../svglib/Window.h"
 #include <memory>
+#include <map>
 
 // CTestWindowDlg dialog
 class CTestWindowDlg : public CDialogEx, public IEventListener
@@ -104,7 +105,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
-	void OnShowSvgLibContextMenu(std::wstring shapeId, CPoint clickPos);
 	void RepositionCtrl(int id);
 
 	std::wstring ExeDir();
@@ -116,6 +116,13 @@ public:
 	CStatic d2dView_;
 	
 private:
+	enum class BodyPart { Head, Torso, LeftArm, RightArm, LeftHand, RightHand, LeftLeg, RightLeg, LeftFoot, RightFoot, Unknown };
+	struct Action { UINT menuId; std::wstring displayText; };
+	std::map<BodyPart, std::vector<Action>> bodyPartActions_;
+	BodyPart ParseBodyPart(const std::wstring& id);
+	void SetBodyPartMapping();
+	void ShowContextMenuForBodyPart(BodyPart part, CPoint screenPoint);
+
 	CComboBox comboSvg_;
 	bool comboAnchorCached_ = false;
 	int comboMarginRight_ = 0;

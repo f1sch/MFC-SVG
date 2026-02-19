@@ -212,6 +212,8 @@ BOOL CTestWindowDlg::OnInitDialog()
 	checkSvgDoc_.SetCheck(true);
 	checkSvgGeometry_.SetCheck(true);
 
+	SetBodyPartMapping();
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -358,6 +360,125 @@ void CTestWindowDlg::UpdateAnchoredLayout(int cx, int cy)
 	);
 }
 
+CTestWindowDlg::BodyPart CTestWindowDlg::ParseBodyPart(const std::wstring& id)
+{
+	return BodyPart();
+}
+
+void CTestWindowDlg::SetBodyPartMapping()
+{
+	bodyPartActions_[BodyPart::Head] = {
+		{ ID_NEUROLOGISCHEUNTERSUCHUNG_PUPILLENREAKTIONPRUEFEN, L"Pupillenreaktion pruefen" },
+		{ ID_NEUROLOGISCHEUNTERSUCHUNG_BEWUSSTSEINSLAGEBEURTEILEN, L"Bewusstseinslage beurteilen" },
+		{ ID_VERBANDSTECHNIKEN_KOPFVERBAND, L"Kopfverband" },
+		{ ID_RUHIGSTELLUNG_HALSKRAUSEANLEGEN, L"Halskrause anlegen" },
+		{ ID_ROENTGEN_SCHAEDEL, L"Schaedel roentgen" }
+	};
+
+	bodyPartActions_[BodyPart::Torso] = {
+		{ ID_KATHETER_BLASENKATHETERLEGEN, L"Blasenkatheter legen" },
+		{ ID_KATHETER_ZVKLEGEN, L"ZVK legen" },
+		{ ID_INTRAMUSKULAER_GLUTEAL, L"Injektion intramuskulaer gluteal" },
+		{ ID_SUBKUTAN_ABDOMEN, L"Injektion subkutan Abdomen" },
+		{ ID_DRAINAGEN_THORAXDRAINAGE, L"Thoraxdrainage" },
+		{ ID_ROENTGEN_THORAX, L"Thorax roentgen" }
+	};
+
+	bodyPartActions_[BodyPart::LeftArm] = {
+		{ ID_MOTORIKTESTEN_ARMBEWEGLICHKEITTESTEN, L"Armbeweglichkeit testen links" },
+		{ ID_ARTERIELLEZUGANGLEGEN_RADIALIS, L"Zugang legen radialis links" },
+		{ ID_INTRAMUSKULAER_DELTAMUSKEL, L"Injektion intramuskulaer Deltamuskel links" },
+		{ ID_SUBKUTAN_OBERARM, L"Injektion subkutan Oberarm links" },
+		{ ID_ZUGANGLEGEN_UNTERARMVENE, L" Zugang legen Unterarmvene links" },
+		{ ID_VERBANDSTECHNIKEN_SCHULTERVERBAND, L"Schulterverband links" },
+		{ ID_VERBANDSTECHNIKEN_ARMVERBAND, L"Armverband links" },
+		{ ID_RUHIGSTELLUNG_ARMSCHIENEANLEGEN, L"Ruhigstellung Armschienen anlegen links" },
+		{ ID_HOCHLAGERN_ARMHOCHLAGERN, L"Arm hochlagern links" },
+		{ ID_AMPUTATION_ARM, L"Amputation links" },
+		{ ID_ROENTGEN_ARM, L"Roentgen links" }
+	};
+	bodyPartActions_[BodyPart::RightArm] = {
+		{ ID_MOTORIKTESTEN_ARMBEWEGLICHKEITTESTEN, L"Armbeweglichkeit testen rechts" },
+		{ ID_ARTERIELLEZUGANGLEGEN_RADIALIS, L"Zugang legen radialis rechts" },
+		{ ID_INTRAMUSKULAER_DELTAMUSKEL, L"Injektion intramuskulaer Deltamuskel rechts" },
+		{ ID_SUBKUTAN_OBERARM, L"Injektion subkutan Oberarm rechts" },
+		{ ID_ZUGANGLEGEN_UNTERARMVENE, L" Zugang legen Unterarmvene rechts" },
+		{ ID_VERBANDSTECHNIKEN_SCHULTERVERBAND, L"Schulterverband rechts" },
+		{ ID_VERBANDSTECHNIKEN_ARMVERBAND, L"Armverband rechts" },
+		{ ID_RUHIGSTELLUNG_ARMSCHIENEANLEGEN, L"Ruhigstellung Armschienen anlegen rechts" },
+		{ ID_HOCHLAGERN_ARMHOCHLAGERN, L"Arm hochlagern rechts" },
+		{ ID_AMPUTATION_ARM, L"Amputation rechts" },
+		{ ID_ROENTGEN_ARM, L"Roentgen rechts" }
+	};
+
+	bodyPartActions_[BodyPart::LeftHand] = {
+		{ ID_ZUGANGLEGEN_HANDVENE, L"Zugang legen Handvene links" }
+	};
+	bodyPartActions_[BodyPart::RightHand] = {
+		{ ID_ZUGANGLEGEN_HANDVENE, L"Zugang legen Handvene rechts" }
+	};
+
+	bodyPartActions_[BodyPart::LeftLeg] = {
+		{ ID_MOTORIKTESTEN_BEINKRAFTTESTEN, L"Beinkraft testen links" },
+		{ ID_ARTERIELLEZUGANGLEGEN_FEMORALIS, L"Zugang legen Femoralis links" },
+		{ ID_INTRAMUSKULAER_VASTUSLATERALIS, L"Injektion intramuskulaer vastus lateralis links" },
+		{ ID_SUBKUTAN_OBERSCHENKEL, L"Injektion subkutan Oberschenkel links" },
+		{ ID_VERBANDSTECHNIKEN_BEINVERBAND, L"Beinverband links" },
+		{ ID_RUHIGSTELLUNG_BEINSCHIENEANLEGEN, L"Beinschiene anlegen links" },
+		{ ID_HOCHLAGERN_BEINHOCHLAGERN, L"Bein hochlagern links" },
+		{ ID_AMPUTATION_BEIN, L"Amputation links" },
+		{ ID_ROENTGEN_BEIN, L"Roentgen links" },
+	};
+	bodyPartActions_[BodyPart::RightLeg] = {
+		{ ID_MOTORIKTESTEN_BEINKRAFTTESTEN, L"Beinkraft testen rechts" },
+		{ ID_ARTERIELLEZUGANGLEGEN_FEMORALIS, L"Zugang legen Femoralis rechts" },
+		{ ID_INTRAMUSKULAER_VASTUSLATERALIS, L"Injektion intramuskulaer vastus lateralis rechts" },
+		{ ID_SUBKUTAN_OBERSCHENKEL, L"Injektion subkutan Oberschenkel rechts" },
+		{ ID_VERBANDSTECHNIKEN_BEINVERBAND, L"Beinverband rechts" },
+		{ ID_RUHIGSTELLUNG_BEINSCHIENEANLEGEN, L"Beinschiene anlegen rechts" },
+		{ ID_HOCHLAGERN_BEINHOCHLAGERN, L"Bein hochlagern rechts" },
+		{ ID_AMPUTATION_BEIN, L"Amputation rechts" },
+		{ ID_ROENTGEN_BEIN, L"Roentgen rechts" },
+	};
+
+	bodyPartActions_[BodyPart::LeftFoot] = {
+		{ ID_MOTORIKTESTEN_FUSSREFLEXPRUEFEN, L"Fussreflex pruefen links" },
+		{ ID_VERBANDSTECHNIKEN_FUSSVERBAND, L"Fussverband links" },
+		{ ID_AMPUTATION_FUSS, L"Amputation links" },
+	};
+	bodyPartActions_[BodyPart::RightFoot] = {
+		{ ID_MOTORIKTESTEN_FUSSREFLEXPRUEFEN, L"Fussreflex pruefen rechts" },
+		{ ID_VERBANDSTECHNIKEN_FUSSVERBAND, L"Fussverband rechts" },
+		{ ID_AMPUTATION_FUSS, L"Amputation rechts" },
+	};
+}
+
+void CTestWindowDlg::ShowContextMenuForBodyPart(BodyPart part, CPoint screenPoint)
+{
+	CMenu popup;
+	popup.CreatePopupMenu();
+
+	auto it = bodyPartActions_.find(part);
+	if (it != bodyPartActions_.end())
+	{
+		for (const auto& action : it->second)
+		{
+			popup.AppendMenuW(
+				MF_STRING,
+				action.menuId,
+				action.displayText.c_str()
+			);
+		}
+	}
+
+	popup.TrackPopupMenu(
+		TPM_LEFTALIGN | TPM_RIGHTBUTTON,
+		screenPoint.x,
+		screenPoint.y,
+		this
+	);
+}
+
 // The system calls this function to obtain the cursor to display while the user drags
 //  the minimized window.
 HCURSOR CTestWindowDlg::OnQueryDragIcon()
@@ -372,32 +493,24 @@ void CTestWindowDlg::OnSvgHit(const std::wstring& id)
 		return;
 	}
 	staticHitResult_.SetWindowTextW(id.c_str());
-}
+	
+	BodyPart part = BodyPart::Unknown;
+	// TODO: Get mouse coords
+	// TODO: Funktion wird auch bei mousehover aufgerufen, soll nur bei rechtsklick aufgerufen werden
+	if (id == L"Head") part = BodyPart::Head;
+	if (id == L"Torso") part = BodyPart::Torso;
 
-void CTestWindowDlg::OnShowSvgLibContextMenu(std::wstring shapeId, CPoint clickPos)
-{
-	// TESTING:
-	CMenu hPopupMenu;
-	hPopupMenu.CreatePopupMenu();
-
-	if (hPopupMenu)
-	{
-		if (shapeId == L"Head")
-		{
-			// die IDs duerfen nicht bei 0 anfangen, weil ON_COMMAND(0, ...) reserviert ist
-			hPopupMenu.AppendMenu(MF_STRING, 1001, _T("Vena jugularis interna dextra"));
-			hPopupMenu.AppendMenu(MF_STRING, 1002, _T("Vena jugularis interna sinistra"));
-			hPopupMenu.AppendMenu(MF_STRING, 1003, _T("Vena jugularis externa dextra"));
-			hPopupMenu.AppendMenu(MF_STRING, 1004, _T("Vena jugularis externa sinistra"));
-			hPopupMenu.AppendMenu(MF_STRING, 1005, _T("Vena jugularis subclavia dextra"));
-			hPopupMenu.AppendMenu(MF_STRING, 1006, _T("Vena jugularis subclavia sinistra"));
-		}
-
-		POINT pt;
-		GetCursorPos(&pt);
-		UINT option = TrackPopupMenu(hPopupMenu, TPM_LEFTBUTTON, pt.x, pt.y, 0, m_hWnd, nullptr);
-
-	}
+	if (id == L"LeftArm") part = BodyPart::LeftArm;
+	if (id == L"LeftHand") part = BodyPart::LeftHand;
+	if (id == L"LeftLeg") part = BodyPart::LeftLeg;
+	if (id == L"LeftFoot") part = BodyPart::LeftFoot;
+	
+	if (id == L"RightArm") part = BodyPart::RightArm;
+	if (id == L"RightHand") part = BodyPart::RightHand;
+	if (id == L"RightLeg") part = BodyPart::RightLeg;
+	if (id == L"RightFoot") part = BodyPart::RightFoot;
+	
+	ShowContextMenuForBodyPart(part, { 0,0 });
 }
 
 void CTestWindowDlg::RepositionCtrl(int id)
