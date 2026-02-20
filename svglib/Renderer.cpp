@@ -312,8 +312,7 @@ void SvgLib::Graphics::Renderer::SetStyleAttribute(
 	std::wstring attribute, 
 	D2D1::ColorF color)
 {
-	// TODO:
-	//element->SetAttributeValue(attribute, color);
+	// TODO: element->SetAttributeValue(attribute, color);
 }
 
 void Renderer::OnMouseMove(int x, int y)

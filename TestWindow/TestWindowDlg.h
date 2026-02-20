@@ -26,7 +26,7 @@ public:
 // Implementation
 public:
 	afx_msg void OnCbnSelchangeComboSvgs();
-	afx_msg void OnStnClickedSvgHitResult(); // TODO: delete me
+	afx_msg void OnStnClickedSvgHitResult(); // TODO: delete me ?
 	virtual void OnSvgHit(const std::wstring& id) override;
 	virtual void OnSvgHitRightMouseButton(const std::wstring& id, CPoint point) override;
 	afx_msg void OnBnClickedCheckDoc();
@@ -102,7 +102,6 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg HCURSOR OnQueryDragIcon();
-	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point); // TODO: delete me
 	DECLARE_MESSAGE_MAP()
 
 private:
@@ -120,7 +119,6 @@ private:
 	enum class BodyPart { Head, Torso, LeftArm, RightArm, LeftHand, RightHand, LeftLeg, RightLeg, LeftFoot, RightFoot, Unknown };
 	struct Action { UINT menuId; std::wstring displayText; };
 	std::map<BodyPart, std::vector<Action>> bodyPartActions_;
-	BodyPart ParseBodyPart(const std::wstring& id); // TODO: delete me?
 	void SetBodyPartMapping();
 	void ShowContextMenuForBodyPart(BodyPart part, CPoint screenPoint);
 

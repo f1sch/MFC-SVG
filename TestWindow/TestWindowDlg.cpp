@@ -360,11 +360,6 @@ void CTestWindowDlg::UpdateAnchoredLayout(int cx, int cy)
 	);
 }
 
-CTestWindowDlg::BodyPart CTestWindowDlg::ParseBodyPart(const std::wstring& id)
-{
-	return BodyPart();
-}
-
 void CTestWindowDlg::SetBodyPartMapping()
 {
 	bodyPartActions_[BodyPart::Head] = {
@@ -389,7 +384,7 @@ void CTestWindowDlg::SetBodyPartMapping()
 		{ ID_ARTERIELLEZUGANGLEGEN_RADIALIS, L"Zugang legen radialis links" },
 		{ ID_INTRAMUSKULAER_DELTAMUSKEL, L"Injektion intramuskulaer Deltamuskel links" },
 		{ ID_SUBKUTAN_OBERARM, L"Injektion subkutan Oberarm links" },
-		{ ID_ZUGANGLEGEN_UNTERARMVENE, L" Zugang legen Unterarmvene links" },
+		{ ID_ZUGANGLEGEN_UNTERARMVENE, L"Zugang legen Unterarmvene links" },
 		{ ID_VERBANDSTECHNIKEN_SCHULTERVERBAND, L"Schulterverband links" },
 		{ ID_VERBANDSTECHNIKEN_ARMVERBAND, L"Armverband links" },
 		{ ID_RUHIGSTELLUNG_ARMSCHIENEANLEGEN, L"Ruhigstellung Armschienen anlegen links" },
@@ -546,7 +541,7 @@ void CTestWindowDlg::RepositionCtrl(int id)
 
 void CTestWindowDlg::OnStnClickedSvgHitResult()
 {
-	// TODO: Add your control notification handler code here
+	// Add your control notification handler code here
 }
 
 std::wstring CTestWindowDlg::ExeDir()
@@ -594,23 +589,6 @@ void CTestWindowDlg::OnBnClickedCheckGeom()
 		svgLibWindow_->SetRendererStates("geom", false);
 	
 	svgLibWindow_->Invalidate();
-}
-
-void CTestWindowDlg::OnContextMenu(CWnd* pWnd, CPoint point)
-{
-	CMenu menu;
-	menu.LoadMenuW(IDR_NEGATIVE_CONTEXT_MENU);
-
-	CMenu* pPopup = menu.GetSubMenu(0);
-	if (pPopup != nullptr)
-	{
-		pPopup->TrackPopupMenu(
-			TPM_LEFTALIGN | TPM_RIGHTBUTTON,
-			point.x,
-			point.y,
-			this
-		);
-	}
 }
 
 void CTestWindowDlg::OnBlutdruckMessen()

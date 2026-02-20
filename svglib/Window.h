@@ -49,8 +49,6 @@ namespace SvgLib::Window
 		afx_msg LRESULT OnMouseHover(WPARAM wParam, LPARAM lParam);
 		afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint point);
 
-		afx_msg void OnMenuRange(UINT nID);
-
 		D2D1_POINT_2F GetClientPixelInDPI();
 	
 		// Enables dynamic creation and access to run-time class information 
