@@ -43,12 +43,11 @@ namespace SvgLib::Window
 		afx_msg void OnSize(UINT nType, int cx, int cy);
 		afx_msg void OnPaint();
 		afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+		afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 		afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 		afx_msg LRESULT OnMouseLeave(WPARAM wParam, LPARAM lParam);
 		afx_msg LRESULT OnMouseHover(WPARAM wParam, LPARAM lParam);
 		afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint point);
-
-		afx_msg void OnMenuRange(UINT nID);
 
 		D2D1_POINT_2F GetClientPixelInDPI();
 	

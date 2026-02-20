@@ -37,6 +37,7 @@ namespace SvgLib::Window
 		ON_WM_SIZE()
 		ON_WM_PAINT()
 		ON_WM_LBUTTONDOWN()
+		ON_WM_RBUTTONDOWN()
 		ON_WM_MOUSEMOVE()
 		ON_MESSAGE(WM_MOUSELEAVE, OnMouseLeave)
 		ON_MESSAGE(WM_MOUSEHOVER, OnMouseHover)
@@ -187,6 +188,26 @@ void Window::OnLButtonDown(UINT nFlags, CPoint point)
 		}
 	}
 	CWnd::OnLButtonDown(nFlags, point);
+}
+
+void Window::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	if (renderer_)
+	{
+		UINT dpi = ::GetDpiForWindow(m_hWnd);
+		float dpiScale = static_cast<float>(dpi) / static_cast<float>(USER_DEFAULT_SCREEN_DPI);
+		float xDip = point.x / dpiScale;
+		float yDip = point.y / dpiScale;
+
+		std::wstring geometryId = renderer_->OnMouseDown({ xDip, yDip });
+
+		if (listener_)
+		{
+			listener_->OnSvgHitRightMouseButton(geometryId, point);
+		}
+		Invalidate();
+	}
+	CWnd::OnRButtonDown(nFlags, point);
 }
 
 void Window::OnMouseMove(UINT nFlags, CPoint point)

@@ -477,7 +477,7 @@ void SvgCache::ReadSvgElement(ID2D1SvgElement* element, SvgElementInfo& elemInfo
 	}
 	
 }
-// TODO: delete me. ReadSvgElement() macht das gleiche
+// TODO: delete me? ReadSvgElement() macht das gleiche
 void SvgCache::ReadImageElement(ID2D1SvgElement* element)
 {
 	float width = {};
