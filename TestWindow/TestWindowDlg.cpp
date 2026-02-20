@@ -455,6 +455,8 @@ void CTestWindowDlg::SetBodyPartMapping()
 
 void CTestWindowDlg::ShowContextMenuForBodyPart(BodyPart part, CPoint screenPoint)
 {
+	ClientToScreen(&screenPoint);
+
 	CMenu popup;
 	popup.CreatePopupMenu();
 
@@ -493,10 +495,13 @@ void CTestWindowDlg::OnSvgHit(const std::wstring& id)
 		return;
 	}
 	staticHitResult_.SetWindowTextW(id.c_str());
-	
+}
+
+void CTestWindowDlg::OnSvgHitRightMouseButton(const std::wstring& id, CPoint point)
+{
+	//ClientToScreen(&point);
+
 	BodyPart part = BodyPart::Unknown;
-	// TODO: Get mouse coords
-	// TODO: Funktion wird auch bei mousehover aufgerufen, soll nur bei rechtsklick aufgerufen werden
 	if (id == L"Head") part = BodyPart::Head;
 	if (id == L"Torso") part = BodyPart::Torso;
 
@@ -504,13 +509,13 @@ void CTestWindowDlg::OnSvgHit(const std::wstring& id)
 	if (id == L"LeftHand") part = BodyPart::LeftHand;
 	if (id == L"LeftLeg") part = BodyPart::LeftLeg;
 	if (id == L"LeftFoot") part = BodyPart::LeftFoot;
-	
+
 	if (id == L"RightArm") part = BodyPart::RightArm;
 	if (id == L"RightHand") part = BodyPart::RightHand;
 	if (id == L"RightLeg") part = BodyPart::RightLeg;
 	if (id == L"RightFoot") part = BodyPart::RightFoot;
-	
-	ShowContextMenuForBodyPart(part, { 0,0 });
+
+	ShowContextMenuForBodyPart(part, point);
 }
 
 void CTestWindowDlg::RepositionCtrl(int id)
