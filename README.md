@@ -1,6 +1,6 @@
 # SvgLib
 
-![TestWindow](/images/MFC-SVG.gif)
+![TestWindow](/images/MFC-SVG-TestWindow.gif)
 
 ### Summary
 This statically compiled C++ library can be integrated into Windows MFC applications and was created to explore graphical user interaction within dialog windows.
