@@ -1,6 +1,6 @@
 # SvgLib
 
-### Summary
+## Summary
 This statically compiled C++ library can be integrated into Windows MFC applications and was created to explore graphical user interaction within dialog windows.
 
 The goal was to simplify working with complex, deeply nested context menus: instead of reading through long menu structures, users can click directly on graphical elements to trigger actions faster and more intuitively.
@@ -8,6 +8,17 @@ The goal was to simplify working with complex, deeply nested context menus: inst
 SVG was chosen as the graphics format because SVG images are easy to design and customize. This makes it straightforward to adapt the visuals to specific application needs.
 
 The library serves as an exploratory approach to graphics-driven interaction in classic MFC UIs, with a focus on improving usability for complex workflows.
+
+## Pictures
+### Before
+The following image demonstrates a nested context menu in a dialog window of a MFC application.
+
+Many endpoints only become visible once the corresponding parent nodes of the context menus have been opened.
+
+Finding the right value can be tedious the more nested the menus get.
+
+![Example of a nested context menu](/negative_context_menu.png)
+---
 
 ## Installation
 This project demonstrates how the library can be used in practice.
@@ -34,8 +45,6 @@ Build and run the project to get an impression of the libabry's functionality.
 4. Run
     
     ```.\MFC-SVG\build\TestWindow\Debug\Example.exe```
-
-### Pictures
 
 ### License
 MIT License
