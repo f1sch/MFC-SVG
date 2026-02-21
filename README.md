@@ -1,5 +1,7 @@
 # SvgLib
 
+![TestWindow](/images/MFC-SVG.gif)
+
 ### Summary
 This statically compiled C++ library can be integrated into Windows MFC applications and was created to explore graphical user interaction within dialog windows.
 
@@ -18,7 +20,7 @@ Many endpoints only become visible once the corresponding parent nodes of the co
 
 Finding the right value can be tedious the more nested the menus get.
 
-![Example of a nested context menu](/negative_context_menu.png)
+![Example of a nested context menu](/images/negative_context_menu.png)
 
 ---
 
@@ -27,7 +29,7 @@ Finding the right value can be tedious the more nested the menus get.
 The specific context menu displays only values that can be applied to the area that was clicked on.
 
 In this example the left hand was clicked.
-![Example of a specific context menu](/positive_context_menu.png)
+![Example of a specific context menu](/images/positive_context_menu.png)
 
 #### Conclusion
 This is just an example to demonstrate what the initial idea behind this library was.
