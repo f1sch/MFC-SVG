@@ -1,6 +1,6 @@
 # SvgLib
 
-## Summary
+### Summary
 This statically compiled C++ library can be integrated into Windows MFC applications and was created to explore graphical user interaction within dialog windows.
 
 The goal was to simplify working with complex, deeply nested context menus: instead of reading through long menu structures, users can click directly on graphical elements to trigger actions faster and more intuitively.
@@ -9,25 +9,43 @@ SVG was chosen as the graphics format because SVG images are easy to design and 
 
 The library serves as an exploratory approach to graphics-driven interaction in classic MFC UIs, with a focus on improving usability for complex workflows.
 
-## Pictures
-### Before
-The following image demonstrates a nested context menu in a dialog window of a MFC application.
+### Pictures
+The following images demonstrate a nested and a specific context menu in a dialog window of a MFC application.
+
+#### Before
 
 Many endpoints only become visible once the corresponding parent nodes of the context menus have been opened.
 
 Finding the right value can be tedious the more nested the menus get.
 
 ![Example of a nested context menu](/negative_context_menu.png)
+
 ---
 
-## Installation
+#### After
+
+The specific context menu displays only values that can be applied to the area that was clicked on.
+
+In this example the left hand was clicked.
+![Example of a specific context menu](/positive_context_menu.png)
+
+#### Conclusion
+This is just an example to demonstrate what the initial idea behind this library was.
+
+In this case the time to find a specific treatment for hands is reduced, becauses values that can not be applied to hands are filtered out.
+
+If the user clicks on an area, only values that can be applied to the specific area are shown.
+
+This reduces time to read through nested context menus.
+
+### Installation
 This project demonstrates how the library can be used in practice.
 
 It includes example SVG files and a runnable sample application.
 
 Build and run the project to get an impression of the libabry's functionality.
 
-### Build and run
+#### Build and run
 1. Clone the `MFC-SVG` repository
    
    ``` git clone https://github.com/f1sch/MFC-SVG ```
