@@ -173,40 +173,40 @@ void Window::OnSize(UINT nType, int cx, int cy)
 
 void Window::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	if (renderer_)
+	if (!renderer_) return;
+	
+	UINT dpi = ::GetDpiForWindow(m_hWnd);
+	float dpiScale = static_cast<float>(dpi) / static_cast<float>(USER_DEFAULT_SCREEN_DPI);
+	float xDip = point.x / dpiScale;
+	float yDip = point.y / dpiScale;
+	DebugLogger::Info(std::format("Point:{}|{} is inside Direct2D Window", point.x, point.y));
+	
+	std::wstring geometryId = renderer_->OnMouseDown({ xDip, yDip });
+	if (!geometryId.empty())
 	{
-		UINT dpi = ::GetDpiForWindow(m_hWnd);
-		float dpiScale = static_cast<float>(dpi) / static_cast<float>(USER_DEFAULT_SCREEN_DPI);
-		float xDip = point.x / dpiScale;
-		float yDip = point.y / dpiScale;
-		DebugLogger::Info(std::format("Point:{}|{} is inside Direct2D Window", point.x, point.y));
-		
-		std::wstring geometryId = renderer_->OnMouseDown({ xDip, yDip });
-		if (!geometryId.empty())
-		{
-			DebugLogger::Info(std::format(L"Geometry {} was hit!", geometryId));
-		}
+		DebugLogger::Info(std::format(L"Geometry {} was hit!", geometryId));
 	}
+	
 	CWnd::OnLButtonDown(nFlags, point);
 }
 
 void Window::OnRButtonDown(UINT nFlags, CPoint point)
 {
-	if (renderer_)
+	if (!renderer_) return;
+	
+	UINT dpi = ::GetDpiForWindow(m_hWnd);
+	float dpiScale = static_cast<float>(dpi) / static_cast<float>(USER_DEFAULT_SCREEN_DPI);
+	float xDip = point.x / dpiScale;
+	float yDip = point.y / dpiScale;
+
+	std::wstring geometryId = renderer_->OnMouseDown({ xDip, yDip });
+
+	if (listener_)
 	{
-		UINT dpi = ::GetDpiForWindow(m_hWnd);
-		float dpiScale = static_cast<float>(dpi) / static_cast<float>(USER_DEFAULT_SCREEN_DPI);
-		float xDip = point.x / dpiScale;
-		float yDip = point.y / dpiScale;
-
-		std::wstring geometryId = renderer_->OnMouseDown({ xDip, yDip });
-
-		if (listener_)
-		{
-			listener_->OnSvgHitRightMouseButton(geometryId, point);
-		}
-		Invalidate();
+		listener_->OnSvgHitRightMouseButton(geometryId, point);
 	}
+	Invalidate();
+	
 	CWnd::OnRButtonDown(nFlags, point);
 }
 

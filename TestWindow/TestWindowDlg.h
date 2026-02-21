@@ -121,6 +121,7 @@ private:
 	std::map<BodyPart, std::vector<Action>> bodyPartActions_;
 	void SetBodyPartMapping();
 	void ShowContextMenuForBodyPart(BodyPart part, CPoint screenPoint);
+	void ShowWholeContextMenu(CPoint point);
 
 	CComboBox comboSvg_;
 	bool comboAnchorCached_ = false;

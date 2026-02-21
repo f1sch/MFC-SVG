@@ -476,6 +476,23 @@ void CTestWindowDlg::ShowContextMenuForBodyPart(BodyPart part, CPoint screenPoin
 	);
 }
 
+void CTestWindowDlg::ShowWholeContextMenu(CPoint point)
+{
+	CMenu menu;
+	menu.LoadMenuW(IDR_NEGATIVE_CONTEXT_MENU);
+
+	CMenu* pPopup = menu.GetSubMenu(0);
+	if (pPopup != nullptr)
+	{
+		pPopup->TrackPopupMenu(
+			TPM_LEFTALIGN | TPM_RIGHTBUTTON,
+			point.x,
+			point.y,
+			this
+		);
+	}
+}
+
 // The system calls this function to obtain the cursor to display while the user drags
 //  the minimized window.
 HCURSOR CTestWindowDlg::OnQueryDragIcon()
@@ -494,7 +511,14 @@ void CTestWindowDlg::OnSvgHit(const std::wstring& id)
 
 void CTestWindowDlg::OnSvgHitRightMouseButton(const std::wstring& id, CPoint point)
 {
-	//ClientToScreen(&point);
+	ClientToScreen(&point);
+
+	// Show whole context menu if no area is hit
+	if (id.empty())
+	{
+		ShowWholeContextMenu(point);
+		return;
+	}
 
 	BodyPart part = BodyPart::Unknown;
 	if (id == L"Head") part = BodyPart::Head;
